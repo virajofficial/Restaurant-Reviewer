@@ -3,15 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key, this.showLoginSignup = false});
+  const NavBar({super.key, this.showLoginSignup = false, this.title = ''});
 
   final bool showLoginSignup;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color.fromARGB(146, 243, 218, 200),
+        color: Color.fromARGB(255, 243, 218, 200),
         boxShadow: [
           BoxShadow(
             color: Colors.black,
@@ -25,6 +26,7 @@ class NavBar extends StatelessWidget {
       height: 70,
       alignment: Alignment.center,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
               child: Stack(
@@ -44,8 +46,12 @@ class NavBar extends StatelessWidget {
               )
             ],
           )),
-          Expanded(
-            child: Container(),
+          Text(
+            title,
+            style: const TextStyle(
+                color: Color.fromARGB(225, 227, 82, 0),
+                fontSize: 25,
+                fontWeight: FontWeight.w700),
           ),
           showLoginSignup
               ? ButtonBar(
