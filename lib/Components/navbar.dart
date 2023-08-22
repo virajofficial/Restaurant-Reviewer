@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/Screen/loginPage.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key, this.showLoginSignup = false});
@@ -78,7 +79,12 @@ class NavBar extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                      },
                       child: const Text(
                         'Login',
                         style: TextStyle(color: Colors.white),
