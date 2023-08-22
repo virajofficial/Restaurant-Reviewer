@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sized_box_test/Components/footer.dart';
+import 'package:sized_box_test/Components/navbar.dart';
 
 class StartupPage extends StatelessWidget {
   const StartupPage({super.key});
@@ -28,89 +30,9 @@ class StartupPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   //Header Container
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(146, 243, 218, 200),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          spreadRadius: 0,
-                          blurStyle: BlurStyle.outer,
-                          blurRadius: 5,
-                        ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.all(8.0),
-                    height: 70,
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        Container(
-                            child: Stack(
-                          children: [
-                            Opacity(
-                              opacity: 0.3,
-                              child: Image.asset(
-                                '../assets/images/Logo.png',
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
-                            ClipRect(
-                              child: BackdropFilter(
-                                filter:
-                                    ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                                child: Image.asset('../assets/images/Logo.png'),
-                              ),
-                            )
-                          ],
-                        )),
-                        Expanded(
-                          child: Container(),
-                        ),
-                        ButtonBar(
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: Colors.black,
-                                elevation: 5,
-                                backgroundColor: Color(0xFFF2B65B),
-                                minimumSize: Size(120, 50),
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: const Text(
-                                'Register',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shadowColor: Colors.black,
-                                elevation: 5,
-                                backgroundColor: Color(0xFFFF8947),
-                                minimumSize: Size(120, 50),
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: const Text(
-                                'Login',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                  const NavBar(
+                    showLoginSignup: true,
                   ),
-
                   //Body Container
                   Expanded(
                     child: SingleChildScrollView(
@@ -216,21 +138,7 @@ class StartupPage extends StatelessWidget {
                   //Footer Container
                   //Here you will get unexpected behaviour when keyboard pops-up.
                   //So its better to use `bottomNavigationBar` to avoid this.
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Color(0xFF9C6339),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Colors.black,
-                            blurStyle: BlurStyle.outer,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.all(8.0),
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: Text("Footer"),
-                  ),
+                  const Footer(),
                 ],
               ),
             ),

@@ -2,9 +2,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sized_box_test/Components/footer.dart';
+import 'package:sized_box_test/Components/inputField.dart';
+import 'package:sized_box_test/Components/navbar.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool checkValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,48 +38,7 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   //Header Container
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(146, 243, 218, 200),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          spreadRadius: 0,
-                          blurStyle: BlurStyle.outer,
-                          blurRadius: 5,
-                        ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.all(8.0),
-                    height: 70,
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        Container(
-                            child: Stack(
-                          children: [
-                            Opacity(
-                              opacity: 0.3,
-                              child: Image.asset(
-                                '../assets/images/Logo.png',
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
-                            ClipRect(
-                              child: BackdropFilter(
-                                filter:
-                                    ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                                child: Image.asset('../assets/images/Logo.png'),
-                              ),
-                            )
-                          ],
-                        )),
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const NavBar(),
                   //Body Container
                   Expanded(
                     child: Container(
@@ -107,72 +76,67 @@ class LoginPage extends StatelessWidget {
                             const SizedBox(
                               height: 30,
                             ),
+                            const InputField(labelText: 'User Name'),
+                            const InputField(labelText: 'Password'),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 60,
-                                vertical: 16,
-                              ),
-                              child: TextFormField(
-                                style: const TextStyle(
-                                  color: Color(0xFFAA684B),
-                                ),
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(5),
+                              padding: const EdgeInsets.only(left: 55),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Checkbox(
+                                    value: checkValue,
+                                    activeColor: const Color(0xFFAA684B),
+                                    hoverColor:
+                                        const Color.fromARGB(199, 214, 134, 99),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(3),
                                     ),
+                                    side: const BorderSide(
+                                        color: Color(0xFFAA684B), width: 2),
+                                    onChanged: (bool? value) {
+                                      setState(
+                                        () {
+                                          checkValue = value!;
+                                        },
+                                      );
+                                    },
                                   ),
-                                  labelText: 'User Name',
-                                  labelStyle: TextStyle(
-                                    color: Color(0xFFAA684B),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxHeight: 40,
-                                  ),
-                                  filled: true,
-                                  fillColor: Color.fromARGB(118, 255, 211, 186),
-                                ),
+                                  const Text(
+                                    'Show Password',
+                                    style: TextStyle(
+                                      color: Color(0xFF664233),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 60,
-                              ),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  labelText:
-                                      String.fromEnvironment('Password '),
-                                  constraints: BoxConstraints(
-                                    maxHeight: 40,
-                                  ),
-                                  filled: true,
-                                  fillColor: Color.fromARGB(118, 255, 211, 186),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shadowColor: Colors.black,
+                                elevation: 5,
+                                backgroundColor: Color(0xFFFF8947),
+                                minimumSize: Size(120, 50),
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
                                 ),
                               ),
-                            )
+                              onPressed: () {},
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ),
-
-                  //Footer Container
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Color(0xFF9C6339),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 5,
-                            color: Colors.black,
-                            blurStyle: BlurStyle.outer,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.all(8.0),
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: Text("Footer"),
-                  ),
+                  const Footer(),
                 ],
               ),
             ),
