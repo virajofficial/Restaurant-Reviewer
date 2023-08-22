@@ -1,4 +1,4 @@
-# sized_box_test
+# Restaurant Reviewer Flutter
 
 "A new Flutter project."
 
