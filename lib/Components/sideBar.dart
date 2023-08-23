@@ -22,17 +22,26 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(
+        top: 10,
+        left: isHorizontal ? 10 : 0,
+        right: isHorizontal ? 10 : 0,
+      ),
       width: isHorizontal ? double.infinity : 228,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(225, 253, 185, 148),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(3, 10), // changes position of shadow
-          ),
-        ],
+        color: isHorizontal
+            ? Colors.transparent
+            : const Color.fromARGB(225, 253, 185, 148),
+        boxShadow: isHorizontal
+            ? []
+            : [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(3, 10), // changes position of shadow
+                ),
+              ],
       ),
       child: getLayout(
         [
@@ -41,18 +50,21 @@ class SideBar extends StatelessWidget {
             selectedTab: selectedTab,
             changeTab: changeTab,
             isHorizontal: isHorizontal,
+            position: 1,
           ),
           SideBarItem(
             tab: 'PHI',
             selectedTab: selectedTab,
             changeTab: changeTab,
             isHorizontal: isHorizontal,
+            position: 2,
           ),
           SideBarItem(
             tab: 'Settings',
             selectedTab: selectedTab,
             changeTab: changeTab,
             isHorizontal: isHorizontal,
+            position: 3,
           ),
         ],
       ),
