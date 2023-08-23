@@ -28,9 +28,11 @@ class _DashboardState extends State<Dashboard> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('../assets/images/Background_2.png'),
-          fit: BoxFit.cover,
-        ),
+            image: AssetImage(
+              '../assets/images/pattern.jpg',
+            ),
+            scale: 3,
+            repeat: ImageRepeat.repeat),
       ),
       child: Container(
         decoration: BoxDecoration(

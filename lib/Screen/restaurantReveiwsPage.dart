@@ -1,4 +1,7 @@
 import 'dart:ui';
+import 'package:sized_box_test/Components/reviewItem.dart';
+import 'package:sized_box_test/models/restaurant.dart';
+import 'package:sized_box_test/models/review.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
@@ -7,9 +10,47 @@ import 'package:sized_box_test/Components/footer.dart';
 import 'package:sized_box_test/Components/inputField.dart';
 import 'package:sized_box_test/Components/navbar.dart';
 
-class RestaurantReviewsPage extends StatelessWidget {
+class RestaurantReviewsPage extends StatefulWidget {
   const RestaurantReviewsPage({super.key});
 
+  @override
+  State<RestaurantReviewsPage> createState() => _RestaurantReviewsPageState();
+}
+
+var reviews = [
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review\n test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+  Review(
+      restaurant: Restaurant(name: 'test', address: 'test'),
+      review: 'test review'),
+];
+
+class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,11 +69,12 @@ class RestaurantReviewsPage extends StatelessWidget {
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                  '../assets/images/pattern.jpg',
-                ),
-                fit: BoxFit.cover,
-              ),
+                  opacity: 0.3,
+                  image: AssetImage(
+                    '../assets/images/pattern.jpg',
+                  ),
+                  scale: 3,
+                  repeat: ImageRepeat.repeat),
             ),
             child: Scaffold(
               backgroundColor: Colors.transparent,
@@ -70,9 +112,38 @@ class RestaurantReviewsPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Expanded(
-                      child: Container(
-                          alignment: Alignment.center, child: Container()),
+                      child: Stack(
+                        children: [
+                          SingleChildScrollView(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: reviews.length,
+                              itemBuilder: (context, index) =>
+                                  ReviewItem(review: reviews[index]),
+                            ),
+                          ),
+                          Positioned(
+                              right: 20,
+                              bottom: 20,
+                              child: FloatingActionButton(
+                                onPressed: () {},
+                                backgroundColor: Color(0xFFE2582C),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(100)),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ))
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     const Footer(),
                   ],
