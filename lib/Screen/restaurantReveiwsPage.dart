@@ -19,34 +19,34 @@ class RestaurantReviewsPage extends StatefulWidget {
 
 var reviews = [
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review\n test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
   Review(
-      restaurant: Restaurant(name: 'test', address: 'test'),
+      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
       review: 'test review'),
 ];
 
@@ -127,18 +127,19 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                             ),
                           ),
                           Positioned(
-                              right: 20,
-                              bottom: 20,
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                backgroundColor: Color(0xFFE2582C),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100)),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
-                              ))
+                            right: 20,
+                            bottom: 20,
+                            child: FloatingActionButton(
+                              onPressed: () {},
+                              backgroundColor: Color(0xFFE2582C),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),

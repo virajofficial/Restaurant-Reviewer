@@ -5,29 +5,34 @@ class SideBarItem extends StatelessWidget {
       {super.key,
       required this.selectedTab,
       required this.tab,
-      required this.changeTab});
+      required this.changeTab,
+      this.isHorizontal = false});
 
   final String selectedTab;
   final String tab;
   final Function changeTab;
+  final bool isHorizontal;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => changeTab(tab),
       child: Container(
-        width: double.infinity,
+        width: isHorizontal ? 120 : double.infinity,
         height: 50,
-        margin: EdgeInsets.only(right: 20, top: 10),
+        margin: EdgeInsets.only(
+            right: 10, top: 10, bottom: 10, left: isHorizontal ? 10 : 0),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: selectedTab == tab
                 ? const Color.fromARGB(255, 226, 88, 44)
                 : const Color.fromARGB(255, 246, 153, 123),
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(100),
-              bottomRight: Radius.circular(100),
-            ),
+            borderRadius: isHorizontal
+                ? const BorderRadius.all(Radius.circular(20))
+                : const BorderRadius.only(
+                    topRight: Radius.circular(100),
+                    bottomRight: Radius.circular(100),
+                  ),
             boxShadow: const [
               BoxShadow(
                   color: Color.fromARGB(95, 125, 44, 18),

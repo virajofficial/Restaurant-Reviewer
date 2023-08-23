@@ -10,9 +10,9 @@ class RestaurantManage extends StatefulWidget {
 }
 
 var restaurants = [
-  Restaurant(name: 'Restaurant 1', address: 'Moratuwa 1'),
-  Restaurant(name: 'Restaurant 2', address: 'Moratuwa 2'),
-  Restaurant(name: 'Restaurant 3', address: 'Moratuwa 3')
+  Restaurant(restaurantName: 'Restaurant 1', phiArea: 'Moratuwa 1'),
+  Restaurant(restaurantName: 'Restaurant 2', phiArea: 'Moratuwa 2'),
+  Restaurant(restaurantName: 'Restaurant 3', phiArea: 'Moratuwa 3')
 ];
 
 class _RestaurantManageState extends State<RestaurantManage> {
@@ -33,14 +33,32 @@ class _RestaurantManageState extends State<RestaurantManage> {
           ),
         ),
         Expanded(
-          child: SingleChildScrollView(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: restaurants.length,
-              itemBuilder: (context, index) => RestaurantItem(
-                restaurant: restaurants[index],
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: restaurants.length,
+                  itemBuilder: (context, index) => RestaurantItem(
+                    restaurant: restaurants[index],
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                right: 20,
+                bottom: 20,
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  backgroundColor: Color(0xFFE2582C),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100)),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
           ),
         )
       ],

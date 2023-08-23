@@ -3,14 +3,26 @@ import 'package:sized_box_test/Components/sideBarItem.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar(
-      {super.key, required this.selectedTab, required this.changeTab});
+      {super.key,
+      required this.selectedTab,
+      required this.changeTab,
+      this.isHorizontal = false});
   final String selectedTab;
   final Function changeTab;
+  final bool isHorizontal;
+
+  getLayout(List<Widget> children) {
+    return isHorizontal
+        ? Row(children: children)
+        : Column(
+            children: children,
+          );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 228,
+      width: isHorizontal ? double.infinity : 228,
       decoration: BoxDecoration(
         color: const Color.fromARGB(225, 253, 185, 148),
         boxShadow: [
@@ -22,17 +34,26 @@ class SideBar extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        children: [
+      child: getLayout(
+        [
           SideBarItem(
             tab: 'Restaurants',
             selectedTab: selectedTab,
             changeTab: changeTab,
+            isHorizontal: isHorizontal,
           ),
           SideBarItem(
-              tab: 'PHI', selectedTab: selectedTab, changeTab: changeTab),
+            tab: 'PHI',
+            selectedTab: selectedTab,
+            changeTab: changeTab,
+            isHorizontal: isHorizontal,
+          ),
           SideBarItem(
-              tab: 'Settings', selectedTab: selectedTab, changeTab: changeTab),
+            tab: 'Settings',
+            selectedTab: selectedTab,
+            changeTab: changeTab,
+            isHorizontal: isHorizontal,
+          ),
         ],
       ),
     );

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/models/phi.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 
-class RestaurantItem extends StatelessWidget {
-  const RestaurantItem({super.key, required this.restaurant});
+class PhiItem extends StatelessWidget {
+  const PhiItem({super.key, required this.phi});
 
-  final Restaurant restaurant;
+  final Phi phi;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class RestaurantItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  restaurant.restaurantName,
+                  phi.phiName,
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -41,7 +42,7 @@ class RestaurantItem extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
                 Text(
-                  restaurant.phiArea,
+                  phi.phiArea,
                   style: const TextStyle(
                       fontStyle: FontStyle.italic, fontSize: 18),
                 )

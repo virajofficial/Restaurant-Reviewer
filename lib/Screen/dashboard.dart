@@ -28,6 +28,8 @@ class _DashboardState extends State<Dashboard> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Color.fromARGB(68, 252, 92, 0), BlendMode.multiply),
             image: AssetImage(
               '../assets/images/pattern.jpg',
             ),
@@ -50,13 +52,28 @@ class _DashboardState extends State<Dashboard> {
                 Expanded(
                     child: Row(
                   children: [
-                    SideBar(selectedTab: selectedTab, changeTab: changeTab),
+                    MediaQuery.of(context).size.width > 800
+                        ? SideBar(
+                            selectedTab: selectedTab, changeTab: changeTab)
+                        : Container(),
                     Expanded(
-                        child: selectedTab == 'Restaurants'
-                            ? RestaurantManage()
-                            : selectedTab == 'PHI'
-                                ? PHIManage()
-                                : Container())
+                        child: Column(
+                      children: [
+                        MediaQuery.of(context).size.width <= 800
+                            ? SideBar(
+                                selectedTab: selectedTab,
+                                changeTab: changeTab,
+                                isHorizontal: true,
+                              )
+                            : Container(),
+                        Expanded(
+                            child: selectedTab == 'Restaurants'
+                                ? RestaurantManage()
+                                : selectedTab == 'PHI'
+                                    ? PHIManage()
+                                    : Container())
+                      ],
+                    ))
                   ],
                 )),
                 const Footer(),

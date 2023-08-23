@@ -1,13 +1,13 @@
 class Restaurant {
-  final String name;
-  final String address;
+  final String restaurantName;
+  final String phiArea;
 
-  Restaurant({required this.name, required this.address});
+  Restaurant({required this.restaurantName, required this.phiArea});
 
   factory Restaurant.fromJson(Map<String, dynamic> parsedJson) {
     return Restaurant(
-      name: parsedJson['name'],
-      address: parsedJson['address'],
+      restaurantName: parsedJson['restaurantName'],
+      phiArea: parsedJson['phiArea'],
     );
   }
 }
