@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/Components/popupDialog.dart';
 import 'package:sized_box_test/models/review.dart';
 
 class ReviewItem extends StatelessWidget {
@@ -104,8 +105,7 @@ class ReviewItem extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (BuildContext context) =>
-                        _buildPopupDialog(context),
+                    builder: (BuildContext context) => const PopupDialog(),
                   );
                 },
                 child: Container(
@@ -120,17 +120,4 @@ class ReviewItem extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _buildPopupDialog(BuildContext context) {
-  return AlertDialog(
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(),
-        Text("Hello"),
-      ],
-    ),
-  );
 }
