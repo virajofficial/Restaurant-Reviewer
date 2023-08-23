@@ -36,7 +36,7 @@ class NavBar extends StatelessWidget {
                 opacity: 0.3,
                 child: Image.asset(
                   '../assets/images/Logo.png',
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                 ),
               ),
               ClipRect(
@@ -47,13 +47,15 @@ class NavBar extends StatelessWidget {
               )
             ],
           )),
-          Text(
-            title,
-            style: const TextStyle(
-                color: Color.fromARGB(225, 227, 82, 0),
-                fontSize: 25,
-                fontWeight: FontWeight.w700),
-          ),
+          MediaQuery.of(context).size.width > 800
+              ? Text(
+                  title,
+                  style: const TextStyle(
+                      color: Color.fromARGB(225, 227, 82, 0),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700),
+                )
+              : Container(),
           showLoginSignup
               ? ButtonBar(
                   children: [
