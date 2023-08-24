@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sized_box_test/Components/phiItem.dart';
 import 'package:sized_box_test/models/phi.dart';
 
+import '../Api/api.dart';
+
 class PHIManage extends StatefulWidget {
   const PHIManage({super.key});
 
@@ -9,12 +11,22 @@ class PHIManage extends StatefulWidget {
   State<PHIManage> createState() => _PHIManageState();
 }
 
-var phis = [
-  Phi(phiName: 'Viraj Lakshitha', phiArea: 'Padukka'),
-  Phi(phiName: 'Viraj Lakshitha 3', phiArea: 'Padukka 3')
-];
-
 class _PHIManageState extends State<PHIManage> {
+  List<Phi> phis = [];
+
+  getPhis() async {
+    List<Phi> response = await getPhisCall();
+    setState(() {
+      phis = response;
+    });
+  }
+
+  @override
+  void initState() {
+    getPhis();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(

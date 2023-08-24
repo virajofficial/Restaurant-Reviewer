@@ -10,6 +10,6 @@ import 'package:sized_box_test/Screen/startupPage.dart';
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: RestaurantReviewsPage(),
+    home: LoginPage(),
   ));
 }

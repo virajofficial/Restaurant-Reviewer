@@ -17,6 +17,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool checkValue = false;
 
+  String username = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,8 +80,22 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(
                               height: 30,
                             ),
-                            const InputField(labelText: 'User Name'),
-                            const InputField(labelText: 'Password'),
+                            InputField(
+                              labelText: 'User Name',
+                              onChange: (value) {
+                                setState(() {
+                                  username = value;
+                                });
+                              },
+                            ),
+                            InputField(
+                              labelText: 'Password',
+                              onChange: (value) {
+                                setState(() {
+                                  password = value;
+                                });
+                              },
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(left: 55),
                               child: Row(

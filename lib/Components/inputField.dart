@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
   final String labelText;
-  const InputField({super.key, required this.labelText});
+  final Function onChange;
+  const InputField(
+      {super.key, required this.labelText, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +18,9 @@ class InputField extends StatelessWidget {
         //shadowColor: Colors.black,
         //elevation: 10,
         child: TextField(
+          onChanged: (value) {
+            onChange(value);
+          },
           style: const TextStyle(
             color: Color(0xFFAA684B),
           ),

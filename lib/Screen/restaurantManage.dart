@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/Api/api.dart';
 import 'package:sized_box_test/Components/restaurantItem.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 
@@ -9,13 +10,22 @@ class RestaurantManage extends StatefulWidget {
   State<RestaurantManage> createState() => _RestaurantManageState();
 }
 
-var restaurants = [
-  Restaurant(restaurantName: 'Restaurant 1', phiArea: 'Moratuwa 1'),
-  Restaurant(restaurantName: 'Restaurant 2', phiArea: 'Moratuwa 2'),
-  Restaurant(restaurantName: 'Restaurant 3', phiArea: 'Moratuwa 3')
-];
-
 class _RestaurantManageState extends State<RestaurantManage> {
+  List<Restaurant> restaurants = [];
+
+  getRestaurants() async {
+    List<Restaurant> response = await getRestaurantsCall();
+    setState(() {
+      restaurants = response;
+    });
+  }
+
+  @override
+  void initState() {
+    getRestaurants();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
