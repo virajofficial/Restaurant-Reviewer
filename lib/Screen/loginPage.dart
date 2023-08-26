@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:ui';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -6,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sized_box_test/Components/footer.dart';
 import 'package:sized_box_test/Components/inputField.dart';
 import 'package:sized_box_test/Components/navbar.dart';
+import 'package:password_validated_field/password_validated_field.dart';
+import 'package:passwordfield/passwordfield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,7 +18,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late final TextEditingController controller;
   bool checkValue = false;
+  bool _validPassword = false;
+  bool obscureText = true;
 
   String username = '';
   String password = '';
@@ -88,14 +94,104 @@ class _LoginPageState extends State<LoginPage> {
                                 });
                               },
                             ),
-                            InputField(
-                              labelText: 'Password',
-                              onChange: (value) {
+                            // InputField(
+                            //   labelText: 'Password',
+                            //   onChange: (value) {
+                            //     setState(() {
+                            //       password = value;
+                            //     });
+                            //   },
+                            // ),
+                            TextField(
+                              controller: TextEditingController(text: password),
+                              obscureText: obscureText,
+                              textDirection: TextDirection.ltr,
+                              decoration: InputDecoration(
+                                  suffixIcon: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        obscureText = !obscureText;
+                                      });
+                                    },
+                                    child: obscureText
+                                        ? const Icon(Icons.visibility_off)
+                                        : const Icon(Icons.visibility),
+                                  ),
+                                  label: const Text('Password',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(204, 150, 71, 26),
+                                          fontStyle: FontStyle.italic)),
+                                  enabledBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: Color.fromARGB(160, 150, 71, 26),
+                                      )),
+                                  errorBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide: BorderSide(
+                                          width: 2, color: Color(0xFF96471A))),
+                                  disabledBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide: BorderSide(
+                                          width: 2, color: Color(0xFF96471A))),
+                                  focusedBorder: const OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide: BorderSide(
+                                          width: 2, color: Color(0xFF96471A))),
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 370,
+                                    maxHeight: 40,
+                                  )),
+                              onChanged: (value) {
                                 setState(() {
                                   password = value;
                                 });
                               },
                             ),
+                            // Container(
+                            //   color: Colors.transparent,
+                            //   height: 40,
+                            //   constraints: const BoxConstraints(maxWidth: 370),
+                            //   child: PasswordField(
+                            //     passwordDecoration: PasswordDecoration(),
+                            //     errorMessage: '''
+                            // - A uppercase letter
+                            // - A lowercase letter
+                            // - A digit
+                            // - A special character
+                            // - A minimum length of 8 characters
+                            //  ''',
+                            //     hintText: 'Default password constraint ',
+                            //     autoFocus: false,
+                            //     border: PasswordBorder(
+                            //       border: OutlineInputBorder(
+                            //           borderSide: const BorderSide(
+                            //               width: 2, color: Color(0xFF96471A)),
+                            //           borderRadius: BorderRadius.circular(10)),
+                            //       focusedBorder: OutlineInputBorder(
+                            //         borderSide: const BorderSide(
+                            //             width: 2, color: Color(0xFF96471A)),
+                            //         borderRadius: BorderRadius.circular(10),
+                            //       ),
+                            //       focusedErrorBorder: OutlineInputBorder(
+                            //         borderSide: const BorderSide(
+                            //             width: 2, color: Color(0xFF96471A)),
+                            //         borderRadius: BorderRadius.circular(10),
+                            //       ),
+                            //       enabledBorder: OutlineInputBorder(
+                            //         borderSide: const BorderSide(
+                            //             width: 2, color: Color(0xFF96471A)),
+                            //         borderRadius: BorderRadius.circular(10),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.only(left: 55),
                               child: Row(

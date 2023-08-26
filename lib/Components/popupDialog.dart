@@ -29,14 +29,23 @@ class PopupDialog extends StatelessWidget {
                     Color(0xFFDF8B3D),
                   ]),
                   border: Border(
-                      left: BorderSide(
-                    color: Color(0xFFBD712B),
-                    width: 3,
-                  )),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
+                    left: BorderSide(
+                      color: Color(0xFFBD712B),
+                      width: 3,
+                    ),
+                    right: BorderSide(
+                      color: Color(0xFFBD712B),
+                      width: 3,
+                    ),
+                    top: BorderSide(
+                      color: Color(0xFFBD712B),
+                      width: 3,
+                    ),
                   ),
+                  // borderRadius: BorderRadius.only(
+                  //   topLeft: Radius.circular(10),
+                  //   topRight: Radius.circular(10),
+                  // ),
                   boxShadow: [
                     BoxShadow(
                       color: Color.fromARGB(150, 0, 0, 0),
@@ -117,10 +126,10 @@ class PopupDialog extends StatelessWidget {
                         width: 3,
                       ),
                     ),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
+                    // borderRadius: BorderRadius.only(
+                    //   bottomLeft: Radius.circular(10),
+                    //   bottomRight: Radius.circular(10),
+                    // ),
                     boxShadow: [
                       BoxShadow(
                         color: Color.fromARGB(150, 0, 0, 0),

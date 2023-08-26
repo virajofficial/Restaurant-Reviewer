@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sized_box_test/Screen/RegisterPage.dart';
 import 'package:sized_box_test/Screen/dashboard.dart';
 
 // components

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/Screen/RegisterPage.dart';
 import 'package:sized_box_test/Screen/loginPage.dart';
 
 class NavBar extends StatelessWidget {
@@ -70,7 +71,14 @@ class NavBar extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterPage(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Register',
                         style: TextStyle(color: Colors.white),
@@ -89,9 +97,11 @@ class NavBar extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
                       },
                       child: const Text(
                         'Login',
