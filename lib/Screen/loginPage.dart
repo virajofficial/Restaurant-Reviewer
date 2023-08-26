@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late final TextEditingController controller;
+  TextEditingController controller = TextEditingController(text: '');
   bool checkValue = false;
   bool _validPassword = false;
   bool obscureText = true;
@@ -103,9 +103,8 @@ class _LoginPageState extends State<LoginPage> {
                             //   },
                             // ),
                             TextField(
-                              controller: TextEditingController(text: password),
+                              controller: controller,
                               obscureText: obscureText,
-                              textDirection: TextDirection.ltr,
                               decoration: InputDecoration(
                                   suffixIcon: GestureDetector(
                                     onTap: () {
