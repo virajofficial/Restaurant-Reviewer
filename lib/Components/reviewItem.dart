@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Components/popupDialog.dart';
+import 'package:sized_box_test/Screen/reviewDialog.dart';
 import 'package:sized_box_test/models/review.dart';
 
 class ReviewItem extends StatelessWidget {
@@ -105,7 +105,7 @@ class ReviewItem extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (BuildContext context) => const PopupDialog(),
+                    builder: (BuildContext context) => const ReviewDialog(),
                   );
                 },
                 child: Container(

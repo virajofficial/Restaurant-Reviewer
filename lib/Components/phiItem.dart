@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sized_box_test/models/phi.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 
-import 'popupDialog.dart';
+import '../Screen/reviewDialog.dart';
 
 class PhiItem extends StatelessWidget {
   const PhiItem({super.key, required this.phi});
@@ -64,7 +64,7 @@ class PhiItem extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (BuildContext context) => const PopupDialog(),
+                    builder: (BuildContext context) => const ReviewDialog(),
                   );
                 },
                 child: Container(

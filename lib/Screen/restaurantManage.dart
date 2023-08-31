@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sized_box_test/Api/api.dart';
 import 'package:sized_box_test/Components/restaurantItem.dart';
+import 'package:sized_box_test/Screen/restaurantDialog.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 
 class RestaurantManage extends StatefulWidget {
@@ -58,7 +59,13 @@ class _RestaurantManageState extends State<RestaurantManage> {
                 right: 20,
                 bottom: 20,
                 child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          const RestaurantDialogue(),
+                    );
+                  },
                   backgroundColor: Color(0xFFE2582C),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100)),

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class PopupDialog extends StatelessWidget {
-  const PopupDialog({super.key});
+class ReviewDialog extends StatelessWidget {
+  const ReviewDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

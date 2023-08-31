@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:ui';
+import 'package:sized_box_test/Screen/RegisterPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
@@ -7,8 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sized_box_test/Components/footer.dart';
 import 'package:sized_box_test/Components/inputField.dart';
 import 'package:sized_box_test/Components/navbar.dart';
-import 'package:password_validated_field/password_validated_field.dart';
-import 'package:passwordfield/passwordfield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -84,9 +83,10 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             const SizedBox(
-                              height: 30,
+                              height: 70,
                             ),
                             InputField(
+                              type: 'text',
                               labelText: 'User Name',
                               onChange: (value) {
                                 setState(() {
@@ -94,137 +94,17 @@ class _LoginPageState extends State<LoginPage> {
                                 });
                               },
                             ),
-                            // InputField(
-                            //   labelText: 'Password',
-                            //   onChange: (value) {
-                            //     setState(() {
-                            //       password = value;
-                            //     });
-                            //   },
-                            // ),
-                            TextField(
-                              controller: controller,
-                              obscureText: obscureText,
-                              decoration: InputDecoration(
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        obscureText = !obscureText;
-                                      });
-                                    },
-                                    child: obscureText
-                                        ? const Icon(Icons.visibility_off)
-                                        : const Icon(Icons.visibility),
-                                  ),
-                                  label: const Text('Password',
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(204, 150, 71, 26),
-                                          fontStyle: FontStyle.italic)),
-                                  enabledBorder: const OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                        width: 2,
-                                        color: Color.fromARGB(160, 150, 71, 26),
-                                      )),
-                                  errorBorder: const OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                          width: 2, color: Color(0xFF96471A))),
-                                  disabledBorder: const OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                          width: 2, color: Color(0xFF96471A))),
-                                  focusedBorder: const OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                          width: 2, color: Color(0xFF96471A))),
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 370,
-                                    maxHeight: 40,
-                                  )),
-                              onChanged: (value) {
+                            InputField(
+                              type: 'password',
+                              labelText: 'Password',
+                              onChange: (value) {
                                 setState(() {
                                   password = value;
                                 });
                               },
                             ),
-                            // Container(
-                            //   color: Colors.transparent,
-                            //   height: 40,
-                            //   constraints: const BoxConstraints(maxWidth: 370),
-                            //   child: PasswordField(
-                            //     passwordDecoration: PasswordDecoration(),
-                            //     errorMessage: '''
-                            // - A uppercase letter
-                            // - A lowercase letter
-                            // - A digit
-                            // - A special character
-                            // - A minimum length of 8 characters
-                            //  ''',
-                            //     hintText: 'Default password constraint ',
-                            //     autoFocus: false,
-                            //     border: PasswordBorder(
-                            //       border: OutlineInputBorder(
-                            //           borderSide: const BorderSide(
-                            //               width: 2, color: Color(0xFF96471A)),
-                            //           borderRadius: BorderRadius.circular(10)),
-                            //       focusedBorder: OutlineInputBorder(
-                            //         borderSide: const BorderSide(
-                            //             width: 2, color: Color(0xFF96471A)),
-                            //         borderRadius: BorderRadius.circular(10),
-                            //       ),
-                            //       focusedErrorBorder: OutlineInputBorder(
-                            //         borderSide: const BorderSide(
-                            //             width: 2, color: Color(0xFF96471A)),
-                            //         borderRadius: BorderRadius.circular(10),
-                            //       ),
-                            //       enabledBorder: OutlineInputBorder(
-                            //         borderSide: const BorderSide(
-                            //             width: 2, color: Color(0xFF96471A)),
-                            //         borderRadius: BorderRadius.circular(10),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 55),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Checkbox(
-                                    value: checkValue,
-                                    activeColor: const Color(0xFFAA684B),
-                                    hoverColor:
-                                        const Color.fromARGB(199, 214, 134, 99),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
-                                    side: const BorderSide(
-                                        color: Color(0xFFAA684B), width: 2),
-                                    onChanged: (bool? value) {
-                                      setState(
-                                        () {
-                                          checkValue = value!;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                  const Text(
-                                    'Show Password',
-                                    style: TextStyle(
-                                      color: Color(0xFF664233),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
+                            SizedBox(
+                              height: 30,
                             ),
                             Container(
                               decoration: const BoxDecoration(
@@ -324,10 +204,15 @@ class _LoginPageState extends State<LoginPage> {
                                         letterSpacing: 2,
                                         fontSize: 14,
                                       )),
-                                  onTap: () => launchUrl(
-                                      Uri.parse(
-                                          'https://stackoverflow.com/questions/51545768/flutter-vertically-center-column'),
-                                      webOnlyWindowName: '_self'),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const RegisterPage(),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             )

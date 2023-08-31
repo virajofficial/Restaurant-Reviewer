@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/Screen/phiDialog.dart';
 import 'package:sized_box_test/Components/phiItem.dart';
 import 'package:sized_box_test/models/phi.dart';
 
@@ -58,7 +59,12 @@ class _PHIManageState extends State<PHIManage> {
                 right: 20,
                 bottom: 20,
                 child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => const PhiDialogue(),
+                    );
+                  },
                   backgroundColor: Color(0xFFE2582C),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100)),

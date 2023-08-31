@@ -15,10 +15,18 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController controller = TextEditingController(text: '');
+  TextEditingController conPControlelr = TextEditingController(text: '');
   bool checkValue = false;
+  bool _validPassword = false;
+  //bool obscureText = true;
 
+  String fName = '';
+  String contactNo = '';
+  String email = '';
   String username = '';
   String password = '';
+  String cPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -81,30 +89,34 @@ class _RegisterPageState extends State<RegisterPage> {
                               height: 30,
                             ),
                             InputField(
+                              type: "text",
                               labelText: 'Full Name',
                               onChange: (value) {
                                 setState(() {
-                                  username = value;
+                                  fName = value;
                                 });
                               },
                             ),
                             InputField(
+                              type: 'number',
                               labelText: 'Contact No',
                               onChange: (value) {
                                 setState(() {
-                                  username = value;
+                                  contactNo = value;
                                 });
                               },
                             ),
                             InputField(
+                              type: 'text',
                               labelText: 'Email',
                               onChange: (value) {
                                 setState(() {
-                                  username = value;
+                                  email = value;
                                 });
                               },
                             ),
                             InputField(
+                              type: 'text',
                               labelText: 'User Name',
                               onChange: (value) {
                                 setState(() {
@@ -113,6 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               },
                             ),
                             InputField(
+                              type: 'password',
                               labelText: 'Password',
                               onChange: (value) {
                                 setState(() {
@@ -121,13 +134,148 @@ class _RegisterPageState extends State<RegisterPage> {
                               },
                             ),
                             InputField(
+                              type: 'password',
                               labelText: 'Confirm Password',
                               onChange: (value) {
                                 setState(() {
-                                  password = value;
+                                  cPassword = value;
                                 });
                               },
                             ),
+                            // InputField(
+                            //   labelText: 'Password',
+                            //   onChange: (value) {
+                            //     setState(() {
+                            //       password = value;
+                            //     });
+                            //   },
+                            // ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            // TextField(
+                            //   controller: controller,
+                            //   obscureText: obscureText,
+                            //   decoration: InputDecoration(
+                            //     filled: true,
+                            //     fillColor: Colors.transparent,
+                            //     hoverColor: Color.fromARGB(22, 150, 71, 26),
+                            //     suffixIconColor:
+                            //         Color.fromARGB(204, 150, 71, 26),
+                            //     suffixIcon: GestureDetector(
+                            //       onTap: () {
+                            //         setState(() {
+                            //           obscureText = !obscureText;
+                            //         });
+                            //       },
+                            //       child: obscureText
+                            //           ? const Icon(Icons.visibility_off)
+                            //           : const Icon(Icons.visibility),
+                            //     ),
+                            //     label: const Text('Password',
+                            //         style: TextStyle(
+                            //             color: Color.fromARGB(204, 150, 71, 26),
+                            //             fontStyle: FontStyle.italic)),
+                            //     enabledBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //           width: 2,
+                            //           color: Color.fromARGB(160, 150, 71, 26),
+                            //         )),
+                            //     errorBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //             width: 2, color: Color(0xFF96471A))),
+                            //     disabledBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //             width: 2, color: Color(0xFF96471A))),
+                            //     focusedBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //             width: 2, color: Color(0xFF96471A))),
+                            //     constraints: const BoxConstraints(
+                            //       maxWidth: 370,
+                            //       maxHeight: 40,
+                            //     ),
+                            //   ),
+                            //   onChanged: (value) {
+                            //     setState(() {
+                            //       password = value;
+                            //     });
+                            //   },
+                            // ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            // TextField(
+                            //   controller: conPControlelr,
+                            //   obscureText: obscureText,
+                            //   decoration: InputDecoration(
+                            //     filled: true,
+                            //     fillColor: Colors.transparent,
+                            //     hoverColor: Color.fromARGB(22, 150, 71, 26),
+                            //     suffixIconColor:
+                            //         Color.fromARGB(204, 150, 71, 26),
+                            //     suffixIcon: GestureDetector(
+                            //       onTap: () {
+                            //         setState(() {
+                            //           obscureText = !obscureText;
+                            //         });
+                            //       },
+                            //       child: obscureText
+                            //           ? const Icon(Icons.visibility_off)
+                            //           : const Icon(Icons.visibility),
+                            //     ),
+                            //     label: const Text('Confirm Password',
+                            //         style: TextStyle(
+                            //             color: Color.fromARGB(204, 150, 71, 26),
+                            //             fontStyle: FontStyle.italic)),
+                            //     enabledBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //           width: 2,
+                            //           color: Color.fromARGB(160, 150, 71, 26),
+                            //         )),
+                            //     errorBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //             width: 2, color: Color(0xFF96471A))),
+                            //     disabledBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //             width: 2, color: Color(0xFF96471A))),
+                            //     focusedBorder: const OutlineInputBorder(
+                            //         borderRadius:
+                            //             BorderRadius.all(Radius.circular(10)),
+                            //         borderSide: BorderSide(
+                            //             width: 2, color: Color(0xFF96471A))),
+                            //     constraints: const BoxConstraints(
+                            //       maxWidth: 370,
+                            //       maxHeight: 40,
+                            //     ),
+                            //   ),
+                            //   onChanged: (value) {
+                            //     setState(() {
+                            //       cPassword = value;
+                            //     });
+                            //   },
+                            // ),
+                            // InputField(
+                            //   labelText: 'Confirm Password',
+                            //   onChange: (value) {
+                            //     setState(() {
+                            //       password = value;
+                            //     });
+                            //   },
+                            // ),
                             // Padding(
                             //   padding: const EdgeInsets.only(left: 55),
                             //   child: Row(

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class InputField extends StatefulWidget {
+class DatePicker extends StatefulWidget {
   final String type;
   final String labelText;
   final Function onChange;
 
-  const InputField({
+  const DatePicker({
     super.key,
     required this.type,
     required this.labelText,
@@ -13,10 +14,18 @@ class InputField extends StatefulWidget {
   });
 
   @override
-  State<InputField> createState() => _InputFieldState();
+  State<DatePicker> createState() => _InputFieldState();
 }
 
-class _InputFieldState extends State<InputField> {
+class _InputFieldState extends State<DatePicker> {
+  TextEditingController dateController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    dateController.text = "";
+  }
+
   bool obscureText = true;
 
   @override
@@ -31,32 +40,33 @@ class _InputFieldState extends State<InputField> {
         //shadowColor: Colors.black,
         //elevation: 10,
         child: TextField(
+          controller: dateController,
           onChanged: (value) {
             widget.onChange(value);
           },
-          cursorColor: Color.fromARGB(204, 150, 71, 26),
-          obscureText: (widget.type == "password") ? obscureText : false,
-          keyboardType:
-              (widget.type == "multiline") ? TextInputType.multiline : null,
-          minLines: 1,
-          maxLines: (widget.type == "multiline") ? 5 : 1,
           style: const TextStyle(
             color: Color(0xFFAA684B),
           ),
+          onTap: () async {
+            DateTime? pickeedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2024));
+            if (pickeedDate != null) {
+              String formattedDate =
+                  DateFormat("yyyy-MM-dd").format(pickeedDate);
+              setState(() {
+                dateController.text = formattedDate.toString();
+              });
+            } else {
+              print('Not Selected');
+            }
+          },
+          readOnly: true,
           decoration: InputDecoration(
-            suffixIconColor: Color.fromARGB(204, 150, 71, 26),
-            suffixIcon: (widget.type == "password")
-                ? GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
-                    child: obscureText
-                        ? const Icon(Icons.visibility_off)
-                        : const Icon(Icons.visibility),
-                  )
-                : null,
+            prefixIcon: const Icon(Icons.calendar_today),
+            prefixIconColor: const Color.fromARGB(204, 150, 71, 26),
             enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(
@@ -83,7 +93,6 @@ class _InputFieldState extends State<InputField> {
                     maxHeight: 40,
                   ),
             filled: true,
-            fillColor: const Color.fromARGB(0, 255, 211, 186),
           ),
         ),
       ),
