@@ -16,6 +16,6 @@ import 'package:sized_box_test/models/review.dart';
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: RestaurantDialogue(),
+    home: LoginPage(),
   ));
 }

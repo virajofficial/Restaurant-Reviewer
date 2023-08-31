@@ -30,7 +30,14 @@ class _InputFieldState extends State<InputField> {
         color: Colors.transparent,
         //shadowColor: Colors.black,
         //elevation: 10,
-        child: TextField(
+        child: TextFormField(
+          autovalidateMode: AutovalidateMode.always,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter ${widget.labelText}';
+            }
+            return null;
+          },
           onChanged: (value) {
             widget.onChange(value);
           },
