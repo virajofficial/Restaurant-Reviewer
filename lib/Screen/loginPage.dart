@@ -96,155 +96,154 @@ class _LoginPageState extends State<LoginPage> {
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         child: Form(
                           key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF96471A),
-                                  letterSpacing: 3,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF96471A),
+                                    letterSpacing: 3,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 70,
-                              ),
-                              InputField(
-                                type: 'text',
-                                labelText: 'User Name',
-                                onChange: (value) {
-                                  setState(() {
-                                    username = value;
-                                  });
-                                },
-                              ),
-                              InputField(
-                                type: 'password',
-                                labelText: 'Password',
-                                onChange: (value) {
-                                  setState(() {
-                                    password = value;
-                                  });
-                                },
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color(0xFFFF8947),
-                                        Color(0xFFFF5C00)
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                InputField(
+                                  type: 'text',
+                                  labelText: 'User Name',
+                                  onChange: (value) {
+                                    setState(() {
+                                      username = value;
+                                    });
+                                  },
+                                ),
+                                InputField(
+                                  type: 'password',
+                                  labelText: 'Password',
+                                  onChange: (value) {
+                                    setState(() {
+                                      password = value;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Container(
+                                  decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color(0xFFFF8947),
+                                          Color(0xFFFF5C00)
+                                        ],
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color:
+                                                Color.fromARGB(255, 141, 52, 0),
+                                            spreadRadius: 2,
+                                            blurStyle: BlurStyle.inner,
+                                            blurRadius: 10,
+                                            offset: Offset(1, 2)),
                                       ],
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                      //elevation: 5,
+                                      minimumSize: const Size(370, 50),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                      ),
                                     ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color:
-                                              Color.fromARGB(255, 141, 52, 0),
-                                          spreadRadius: 2,
-                                          blurStyle: BlurStyle.inner,
-                                          blurRadius: 10,
-                                          offset: Offset(1, 2)),
-                                    ],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent,
-                                    //elevation: 5,
-                                    minimumSize: const Size(370, 50),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                    onPressed: handleLogin,
+                                    child: const Text(
+                                      'Login',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          letterSpacing: 2),
                                     ),
-                                  ),
-                                  onPressed: handleLogin,
-                                  child: const Text(
-                                    'Login',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        letterSpacing: 2),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Text('Forgot ',
-                                      style: TextStyle(
-                                        color: Color(0xFF664233),
-                                        letterSpacing: 2,
-                                        fontSize: 14,
-                                      )),
-                                  InkWell(
-                                    child: const Text('User Name/ Password',
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Text('Forgot ',
                                         style: TextStyle(
-                                          color: Color(0xFFFF5207),
+                                          color: Color(0xFF664233),
                                           letterSpacing: 2,
                                           fontSize: 14,
                                         )),
-                                    onTap: () => launchUrl(
-                                        Uri.parse(
-                                            'https://stackoverflow.com/questions/51545768/flutter-vertically-center-column'),
-                                        webOnlyWindowName: '_self'),
-                                  ),
-                                  const Text(' ?',
-                                      style: TextStyle(
-                                        color: Color(0xFF664233),
-                                        letterSpacing: 2,
-                                        fontSize: 14,
-                                      )),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'Don’t have an account? ',
-                                    style: TextStyle(
-                                      color: Color(0xFF664233),
-                                      letterSpacing: 2,
-                                      fontSize: 14,
+                                    InkWell(
+                                      child: const Text('User Name/ Password',
+                                          style: TextStyle(
+                                            color: Color(0xFFFF5207),
+                                            letterSpacing: 2,
+                                            fontSize: 14,
+                                          )),
+                                      onTap: () => launchUrl(
+                                          Uri.parse(
+                                              'https://stackoverflow.com/questions/51545768/flutter-vertically-center-column'),
+                                          webOnlyWindowName: '_self'),
                                     ),
-                                  ),
-                                  InkWell(
-                                    child: const Text('Register',
+                                    const Text(' ?',
                                         style: TextStyle(
-                                          color: Color(0xFFFF5207),
+                                          color: Color(0xFF664233),
                                           letterSpacing: 2,
                                           fontSize: 14,
                                         )),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const RegisterPage(),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              )
-                            ],
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      'Don’t have an account? ',
+                                      style: TextStyle(
+                                        color: Color(0xFF664233),
+                                        letterSpacing: 2,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      child: const Text('Register',
+                                          style: TextStyle(
+                                            color: Color(0xFFFF5207),
+                                            letterSpacing: 2,
+                                            fontSize: 14,
+                                          )),
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const RegisterPage(),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
