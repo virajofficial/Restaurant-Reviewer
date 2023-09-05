@@ -5,13 +5,16 @@ class InputField extends StatefulWidget {
   final String type;
   final String labelText;
   final Function onChange;
+  final TextEditingController? controller;
+  final Function? validator;
 
-  const InputField({
-    super.key,
-    required this.type,
-    required this.labelText,
-    required this.onChange,
-  });
+  const InputField(
+      {super.key,
+      required this.type,
+      required this.labelText,
+      required this.onChange,
+      this.controller,
+      this.validator});
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -20,9 +23,6 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField> {
   TextEditingController con = TextEditingController();
   bool obscureText = true;
-  bool invalidPassword = false;
-  RegExp passwordRegEx =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
   String toolTipMessage(String type) {
     if (type == 'password') {
@@ -57,22 +57,14 @@ class _InputFieldState extends State<InputField> {
           verticalOffset: 15,
           waitDuration: const Duration(milliseconds: 50),
           child: TextFormField(
+            controller: widget.controller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                invalidPassword = true;
-                return 'Please enter ${widget.labelText}';
+              if (widget.validator != null) {
+                return widget.validator!(value);
               }
-              if (widget.type == "password") {
-                if (value.length < 8) {
-                  invalidPassword = true;
-                  return 'Password must have minimum 8 characters';
-                } else if (!passwordRegEx.hasMatch(value)) {
-                  invalidPassword = true;
-                  return 'Enter valid Password';
-                } else {
-                  invalidPassword = false;
-                }
+              if (value == null || value.isEmpty) {
+                return 'Please enter ${widget.labelText}';
               }
               if (widget.type == "email") {
                 bool isValidEmail = EmailValidator.validate(value);

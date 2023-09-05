@@ -22,7 +22,9 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController conPControlelr = TextEditingController(text: '');
   final _formKey = GlobalKey<FormState>();
   bool checkValue = false;
-  bool _validPassword = false;
+
+  RegExp passwordRegEx =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   //bool obscureText = true;
 
   String name = '';
@@ -31,6 +33,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String username = '';
   String password = '';
   String cPassword = '';
+
+  final passwordController = TextEditingController();
 
   handleRegister() async {
     if (_formKey.currentState!.validate()) {
@@ -155,6 +159,17 @@ class _RegisterPageState extends State<RegisterPage> {
                                       password = value;
                                     });
                                   },
+                                  controller: passwordController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter password';
+                                    } else if (value.length < 8) {
+                                      return 'Password must have minimum 8 characters';
+                                    } else if (!passwordRegEx.hasMatch(value)) {
+                                      return 'Enter valid Password';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 InputField(
                                   type: 'password',
@@ -163,6 +178,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                     setState(() {
                                       cPassword = value;
                                     });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter confirm password';
+                                    } else if (passwordController.text !=
+                                        value) {
+                                      return 'Confirm password is not matching';
+                                    }
+                                    return null;
                                   },
                                 ),
                                 const SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sized_box_test/Components/alertDialog.dart';
 import 'package:sized_box_test/Screen/phiDialog.dart';
 import 'package:sized_box_test/Screen/restaurantDialog.dart';
 import 'package:sized_box_test/Screen/reviewDialog.dart';
@@ -14,8 +15,9 @@ import 'package:sized_box_test/Screen/startupPage.dart';
 import 'package:sized_box_test/models/review.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: StartupPage(),
+    home: const StartupPage(),
+    navigatorKey: navigatorKey,
   ));
 }

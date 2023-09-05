@@ -1,13 +1,13 @@
-import 'dart:html';
 import 'dart:ui';
+import 'package:dio/dio.dart';
 import 'package:sized_box_test/Api/api.dart';
+import 'package:sized_box_test/Components/alertDialog.dart';
 import 'package:sized_box_test/Screen/RegisterPage.dart';
 import 'package:sized_box_test/Screen/dashboard.dart';
 import 'package:sized_box_test/Screen/restaurantReveiwsPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sized_box_test/Components/footer.dart';
 import 'package:sized_box_test/Components/inputField.dart';
 import 'package:sized_box_test/Components/navbar.dart';
@@ -23,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController controller = TextEditingController(text: '');
   final _formKey = GlobalKey<FormState>();
   bool checkValue = false;
-  bool _validPassword = false;
   bool obscureText = true;
 
   String username = '';
@@ -31,26 +30,30 @@ class _LoginPageState extends State<LoginPage> {
 
   handleLogin() async {
     if (_formKey.currentState!.validate()) {
-      print('input validated');
-      var loginResponse = await loginCall(username, password);
-      print("Login Res = ");
-      print(loginResponse);
-      if (loginResponse['role'] == 'user') {
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const RestaurantReviewsPage(),
-          ),
-        );
-      } else if (loginResponse['role'] == 'admin') {
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Dashboard(),
-          ),
-        );
+      try {
+        var loginResponse = await loginCall(username, password);
+        if (loginResponse['role'] == 'user') {
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const RestaurantReviewsPage(),
+            ),
+          );
+        } else if (loginResponse['role'] == 'admin') {
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Dashboard(),
+            ),
+          );
+        }
+      } catch (error) {
+        if (error is DioException) {
+          showMyDialog('Unable to login', error.response?.data['message']);
+        }
+        return;
       }
     }
   }

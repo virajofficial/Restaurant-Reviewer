@@ -16,8 +16,9 @@ final dio = Dio(options);
 callApi(method, url, data) async {
   Response response;
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  dynamic userDetails = jsonDecode(prefs.getString('user_details') ?? '{}');
   Options options =
-      Options(headers: {'authorization': prefs.getString('access_token')});
+      Options(headers: {'authorization': userDetails['token'] ?? ''});
   try {
     switch (method) {
       case 'POST':
@@ -39,14 +40,13 @@ callApi(method, url, data) async {
   }
 }
 
-Future<List<String>?> getPHIAreasCall() async {
+Future<List<String>> getPHIAreasCall() async {
   var response = await callApi('GET', '/meta-data', null);
   if (response != null) {
-    print('PHi ares');
-    print(response['data']['locations'].toString());
-    return response['data']['locations'];
+    return List<String>.from(
+        response['data']['locations'].map((x) => x.toString()));
   } else {
-    return null;
+    return [];
   }
 }
 
@@ -69,12 +69,12 @@ Future<List<Phi>> getPhisCall() async {
 Future<dynamic> loginCall(String userName, String password) async {
   var response = await callApi(
       'POST', '/login', {"userName": userName, "password": password});
-  if (response != null) {
+  if (response != null && response is! DioException) {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('access_token', response['data']['token']);
+    prefs.setString('user_details', jsonEncode(response['data']));
     return response['data'];
   } else {
-    print('Unable to login');
+    throw response;
   }
 }
 

@@ -2,13 +2,11 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sized_box_test/Api/api.dart';
 import 'package:sized_box_test/Components/footer.dart';
 import 'package:sized_box_test/Components/navbar.dart';
-
-import '../models/pihArea.dart';
+import 'package:sized_box_test/Screen/dashboard.dart';
+import 'package:sized_box_test/Screen/restaurantReveiwsPage.dart';
 
 class StartupPage extends StatefulWidget {
   const StartupPage({super.key});
@@ -18,24 +16,34 @@ class StartupPage extends StatefulWidget {
 }
 
 class _StartupPageState extends State<StartupPage> {
-  //List<String> locations = [];
-  static List<String> locations = [];
+  checkIsLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic userDetails = jsonDecode(prefs.getString('user_details') ?? '{}');
+    String userRole = userDetails['role'] ?? '';
+    if (userRole == 'user') {
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const RestaurantReviewsPage(),
+        ),
+      );
+    } else if (userRole == 'admin') {
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Dashboard(),
+        ),
+      );
+    }
+  }
 
-  // getPHIAreas() async {
-  //   String response = await getPHIAreasCall();
-  //   locations = json.decode(response).cast<String>().toList();
-  //   print(locations);
-  //   setState(() {
-  //     locations = json.decode(response).cast<String>().toList();
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   getPHIAreas();
-  //   print("locations ");
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    checkIsLoggedIn();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

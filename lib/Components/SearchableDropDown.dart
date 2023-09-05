@@ -22,10 +22,10 @@ class SearchableDropdown extends StatefulWidget {
 class _SearchableDropdownState extends State<SearchableDropdown> {
   List<String> phiAreas = [];
 
-  /*getPhiAreas() async {
-    List<String>? response = await getPHIAreasCall();
+  getPhiAreas() async {
+    List<String> response = await getPHIAreasCall();
     setState(() {
-      phiAreas = response!;
+      phiAreas = response;
     });
   }
 
@@ -33,7 +33,7 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
   void initState() {
     getPhiAreas();
     super.initState();
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,25 +86,7 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
 
           //disabledItemFn: (String s) => s.startsWith('C'),
         ),
-        //items: phiAreas,
-        items: [
-          "Brazil",
-          "Italia",
-          "Tunisia",
-          "Canada",
-          "Brazil",
-          "Italia",
-          "Tunisia",
-          "Canada",
-          "Brazil",
-          "Italia",
-          "Tunisia",
-          "Canada",
-          "Brazil",
-          "Italia",
-          "Tunisia",
-          "Canada"
-        ],
+        items: phiAreas,
         dropdownDecoratorProps: DropDownDecoratorProps(
           baseStyle: const TextStyle(
             fontStyle: FontStyle.italic,
