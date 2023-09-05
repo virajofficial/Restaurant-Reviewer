@@ -1,12 +1,41 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sized_box_test/Api/api.dart';
 import 'package:sized_box_test/Components/footer.dart';
 import 'package:sized_box_test/Components/navbar.dart';
 
-class StartupPage extends StatelessWidget {
+import '../models/pihArea.dart';
+
+class StartupPage extends StatefulWidget {
   const StartupPage({super.key});
+
+  @override
+  State<StartupPage> createState() => _StartupPageState();
+}
+
+class _StartupPageState extends State<StartupPage> {
+  //List<String> locations = [];
+  static List<String> locations = [];
+
+  // getPHIAreas() async {
+  //   String response = await getPHIAreasCall();
+  //   locations = json.decode(response).cast<String>().toList();
+  //   print(locations);
+  //   setState(() {
+  //     locations = json.decode(response).cast<String>().toList();
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   getPHIAreas();
+  //   print("locations ");
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

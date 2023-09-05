@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:sized_box_test/Components/navbar.dart';
 import 'package:sized_box_test/Components/sideBar.dart';
 import 'package:sized_box_test/Screen/phiManage.dart';
 import 'package:sized_box_test/Screen/restaurantManage.dart';
+
+import '../Api/api.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -16,6 +19,24 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String selectedTab = 'Restaurants';
+
+  static List<String> locations = [];
+
+  // getPHIAreas() async {
+  //   String response = await getPHIAreasCall();
+  //   locations = json.decode(response).cast<String>().toList();
+  //   print(locations);
+  //   setState(() {
+  //     locations = json.decode(response).cast<String>().toList();
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   getPHIAreas();
+  //   print("locations ");
+  //   super.initState();
+  // }
 
   void changeTab(String tab) {
     setState(() {

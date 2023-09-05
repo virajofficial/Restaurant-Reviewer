@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:sized_box_test/Api/api.dart';
 import 'package:sized_box_test/Components/reviewItem.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 import 'package:sized_box_test/models/review.dart';
@@ -17,40 +18,22 @@ class RestaurantReviewsPage extends StatefulWidget {
   State<RestaurantReviewsPage> createState() => _RestaurantReviewsPageState();
 }
 
-var reviews = [
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review\n test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-  Review(
-      restaurant: Restaurant(restaurantName: 'test', phiArea: 'test'),
-      review: 'test review'),
-];
-
 class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
+  List<Review> reviews = [];
+
+  getReviews() async {
+    List<Review> response = await getReviewsCall();
+    setState(() {
+      reviews = response;
+    });
+  }
+
+  @override
+  void initState() {
+    getReviews();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,6 +1,8 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
+import '../Api/api.dart';
+
 class SearchableDropdown extends StatefulWidget {
   //final String type;
   final String labelText;
@@ -18,6 +20,21 @@ class SearchableDropdown extends StatefulWidget {
 }
 
 class _SearchableDropdownState extends State<SearchableDropdown> {
+  List<String> phiAreas = [];
+
+  /*getPhiAreas() async {
+    List<String>? response = await getPHIAreasCall();
+    setState(() {
+      phiAreas = response!;
+    });
+  }
+
+  @override
+  void initState() {
+    getPhiAreas();
+    super.initState();
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,6 +86,7 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
 
           //disabledItemFn: (String s) => s.startsWith('C'),
         ),
+        //items: phiAreas,
         items: [
           "Brazil",
           "Italia",

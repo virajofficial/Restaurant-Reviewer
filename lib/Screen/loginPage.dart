@@ -31,7 +31,10 @@ class _LoginPageState extends State<LoginPage> {
 
   handleLogin() async {
     if (_formKey.currentState!.validate()) {
+      print('input validated');
       var loginResponse = await loginCall(username, password);
+      print("Login Res = ");
+      print(loginResponse);
       if (loginResponse['role'] == 'user') {
         // ignore: use_build_context_synchronously
         Navigator.push(
@@ -131,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                 ),
                                 const SizedBox(
-                                  height: 30,
+                                  height: 10,
                                 ),
                                 Container(
                                   decoration: const BoxDecoration(
