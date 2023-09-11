@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/Screen/phiDialog.dart';
 import 'package:sized_box_test/models/phi.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 
@@ -8,6 +9,8 @@ class PhiItem extends StatelessWidget {
   const PhiItem({super.key, required this.phi});
 
   final Phi phi;
+
+  void dummyGetPhis() {}
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +67,17 @@ class PhiItem extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (BuildContext context) => const ReviewDialog(),
+                    builder: (BuildContext context) => PhiDialogue(
+                        state: 'edit',
+                        details: Phi(
+                          phiAddress: phi.phiAddress,
+                          phiArea: phi.phiArea,
+                          phiContactNo: phi.phiContactNo,
+                          phiEmail: phi.phiEmail,
+                          phiName: phi.phiName,
+                          phiRegNo: phi.phiRegNo,
+                        ),
+                        reloadPhis: dummyGetPhis),
                   );
                 },
                 child: Container(

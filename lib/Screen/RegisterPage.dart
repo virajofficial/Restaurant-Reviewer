@@ -39,7 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
   handleRegister() async {
     if (_formKey.currentState!.validate()) {
       var signupResponse =
-          await RegisterCall(name, username, password, email, contactNo);
+          await registerCall(name, username, password, email, contactNo);
       if (signupResponse['success'] = true) {
         // ignore: use_build_context_synchronously
         Navigator.push(
@@ -74,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   //Header Container
-                  const NavBar(),
+                  const NavBar(showLogout: false),
                   //Body Container
                   Expanded(
                     child: Container(
@@ -143,8 +143,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                   },
                                 ),
                                 InputField(
-                                  type: 'text',
+                                  type: 'uname',
                                   labelText: 'User Name',
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Username';
+                                    }
+                                    return null;
+                                  },
                                   onChange: (value) {
                                     setState(() {
                                       username = value;
@@ -162,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   controller: passwordController,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Please enter password';
+                                      return 'Please enter Password';
                                     } else if (value.length < 8) {
                                       return 'Password must have minimum 8 characters';
                                     } else if (!passwordRegEx.hasMatch(value)) {
@@ -235,7 +241,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 40,
                                 ),
                               ],
                             ),

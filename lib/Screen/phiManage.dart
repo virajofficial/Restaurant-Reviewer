@@ -6,7 +6,9 @@ import 'package:sized_box_test/models/phi.dart';
 import '../Api/api.dart';
 
 class PHIManage extends StatefulWidget {
-  const PHIManage({super.key});
+  const PHIManage({
+    super.key,
+  });
 
   @override
   State<PHIManage> createState() => _PHIManageState();
@@ -62,7 +64,17 @@ class _PHIManageState extends State<PHIManage> {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (BuildContext context) => const PhiDialogue(),
+                      builder: (BuildContext context) => PhiDialogue(
+                          state: 'add',
+                          details: Phi(
+                            phiArea: '',
+                            phiName: '',
+                            phiAddress: '',
+                            phiContactNo: '',
+                            phiEmail: '',
+                            phiRegNo: '',
+                          ),
+                          reloadPhis: getPhis),
                     );
                   },
                   backgroundColor: Color(0xFFE2582C),

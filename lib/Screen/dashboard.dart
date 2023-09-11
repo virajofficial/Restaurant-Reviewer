@@ -31,13 +31,6 @@ class _DashboardState extends State<Dashboard> {
   //   });
   // }
 
-  // @override
-  // void initState() {
-  //   getPHIAreas();
-  //   print("locations ");
-  //   super.initState();
-  // }
-
   void changeTab(String tab) {
     setState(() {
       selectedTab = tab;

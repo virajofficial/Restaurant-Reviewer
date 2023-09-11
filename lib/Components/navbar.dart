@@ -7,9 +7,14 @@ import 'package:sized_box_test/Screen/loginPage.dart';
 import 'package:sized_box_test/Screen/startupPage.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key, this.showLoginSignup = false, this.title = ''});
+  const NavBar(
+      {super.key,
+      this.showLoginSignup = false,
+      this.title = '',
+      this.showLogout = true});
 
   final bool showLoginSignup;
+  final bool showLogout;
   final String title;
 
   @override
@@ -112,34 +117,36 @@ class NavBar extends StatelessWidget {
                     ),
                   ],
                 )
-              : ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.black,
-                    elevation: 5,
-                    backgroundColor: Color(0xFFF2B65B),
-                    minimumSize: Size(120, 50),
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                  ),
-                  onPressed: () async {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.clear();
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const StartupPage(),
+              : (showLogout)
+                  ? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shadowColor: Colors.black,
+                        elevation: 5,
+                        backgroundColor: Color(0xFFF2B65B),
+                        minimumSize: Size(120, 50),
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
                       ),
-                    );
-                  },
-                  child: const Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.clear();
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StartupPage(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )
+                  : SizedBox(width: 0),
         ],
       ),
     );

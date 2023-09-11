@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sized_box_test/Screen/restaurantDialog.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 
 class RestaurantItem extends StatelessWidget {
   const RestaurantItem({super.key, required this.restaurant});
 
   final Restaurant restaurant;
+
+  void dummyRestaurantsList() {}
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class RestaurantItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  restaurant.restaurantName,
+                  restaurant.resName,
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -41,7 +44,7 @@ class RestaurantItem extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
                 Text(
-                  restaurant.phiArea,
+                  restaurant.resPhiArea,
                   style: const TextStyle(
                       fontStyle: FontStyle.italic, fontSize: 18),
                 )
@@ -59,11 +62,20 @@ class RestaurantItem extends StatelessWidget {
                   Radius.circular(10),
                 ),
                 onTap: () {
-                  // showDialog(
-                  //   context: context,
-                  //   builder: (BuildContext context) =>
-                  //       _buildPopupDialog(context),
-                  // );
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => RestaurantDialogue(
+                        state: 'edit',
+                        details: Restaurant(
+                          resName: restaurant.resName,
+                          resRegNo: restaurant.resRegNo,
+                          resContactNo: restaurant.resContactNo,
+                          resRegDate: restaurant.resRegDate,
+                          resAddress: restaurant.resAddress,
+                          resPhiArea: restaurant.resPhiArea,
+                        ),
+                        onReloadRestaurants: dummyRestaurantsList),
+                  );
                 },
                 child: Container(
                   constraints:

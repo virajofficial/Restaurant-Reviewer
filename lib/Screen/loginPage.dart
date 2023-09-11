@@ -27,6 +27,8 @@ class _LoginPageState extends State<LoginPage> {
 
   String username = '';
   String password = '';
+  RegExp passwordRegEx =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
   handleLogin() async {
     if (_formKey.currentState!.validate()) {
@@ -80,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   //Header Container
-                  const NavBar(),
+                  const NavBar(showLogout: false),
                   //Body Container
                   Expanded(
                     child: Container(
@@ -130,6 +132,16 @@ class _LoginPageState extends State<LoginPage> {
                                 InputField(
                                   type: 'password',
                                   labelText: 'Password',
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Password';
+                                    } else if (value.length < 8) {
+                                      return 'Password must have minimum 8 characters';
+                                    } else if (!passwordRegEx.hasMatch(value)) {
+                                      return 'Enter valid Password';
+                                    }
+                                    return null;
+                                  },
                                   onChange: (value) {
                                     setState(() {
                                       password = value;

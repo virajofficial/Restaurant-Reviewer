@@ -2,14 +2,24 @@ import 'package:sized_box_test/models/restaurant.dart';
 
 class Review {
   final String review;
-  final Restaurant restaurant;
+  final String restaurantName;
+  final String phiArea;
+  final String reviewerName;
+  final int restaurantId;
 
-  Review({required this.restaurant, required this.review});
+  Review(
+      {required this.restaurantName,
+      required this.restaurantId,
+      required this.review,
+      required this.phiArea,
+      required this.reviewerName});
 
   factory Review.fromJson(Map<String, dynamic> parsedJson) {
     return Review(
-      review: parsedJson['review'],
-      restaurant: Restaurant.fromJson(parsedJson['restaurant']),
-    );
+        review: parsedJson['reviewDetails'],
+        restaurantName: parsedJson['restaurantName'],
+        restaurantId: parsedJson['restaurantId'],
+        phiArea: parsedJson['phiArea'],
+        reviewerName: parsedJson['userName']);
   }
 }

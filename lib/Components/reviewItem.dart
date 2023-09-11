@@ -57,20 +57,29 @@ class ReviewItem extends StatelessWidget {
                           blurRadius: 5,
                         ),
                       ]),
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Title',
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFCD3100)),
-                        textAlign: TextAlign.start,
+                      Container(
+                        width: 500,
+                        child: Text(
+                          review.review,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFCD3100)),
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                       Text(
-                        'Location',
-                        style: TextStyle(
+                        review.phiArea,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        softWrap: true,
+                        style: const TextStyle(
                             fontStyle: FontStyle.italic, fontSize: 18),
                       )
                     ],
@@ -81,6 +90,9 @@ class ReviewItem extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   child: Text(
                     review.review,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    softWrap: true,
                     textAlign: TextAlign.justify,
                     style: const TextStyle(
                       fontSize: 18,
@@ -105,7 +117,8 @@ class ReviewItem extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (BuildContext context) => const ReviewDialog(),
+                    builder: (BuildContext context) =>
+                        ReviewDialog(review: review),
                   );
                 },
                 child: Container(

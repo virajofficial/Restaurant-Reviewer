@@ -2,8 +2,12 @@
 
 import 'package:flutter/material.dart';
 
+import '../models/review.dart';
+
 class ReviewDialog extends StatelessWidget {
-  const ReviewDialog({super.key});
+  const ReviewDialog({super.key, required this.review});
+
+  final Review review;
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +60,27 @@ class ReviewDialog extends StatelessWidget {
                   ]),
               child: Container(
                 padding: const EdgeInsets.all(5),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Review Title',
+                    Text(review.review,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                         style: TextStyle(
                           color: Color(0xFFCD3100),
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
-                      'Restaurant Name',
+                      review.restaurantName,
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                       ),
                     ),
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           '( By ',
                           style: TextStyle(
                               fontSize: 12,
@@ -81,7 +88,7 @@ class ReviewDialog extends StatelessWidget {
                               fontStyle: FontStyle.italic),
                         ),
                         Text(
-                          'Customer Name ',
+                          review.reviewerName.split(' ')[0],
                           style: TextStyle(
                               fontSize: 12,
                               color: Color(0xFF783B0F),
@@ -140,7 +147,7 @@ class ReviewDialog extends StatelessWidget {
                     ]),
                 child: Column(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: SingleChildScrollView(
                         padding: EdgeInsets.only(
                           left: 60,
@@ -148,9 +155,12 @@ class ReviewDialog extends StatelessWidget {
                           top: 20,
                           bottom: 20,
                         ),
-                        child: Text(
-                          'Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic v v Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic v Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic Description sd fa tr sers  sdf e rs  sf s te rts  s ts fd s f sdf s f sdf s  s df s f s f sdf , fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic, fontStyle: FontStyle.italic ',
-                          textAlign: TextAlign.justify,
+                        child: Container(
+                          width: double.maxFinite,
+                          child: Text(
+                            review.review,
+                            textAlign: TextAlign.justify,
+                          ),
                         ),
                       ),
                     ),

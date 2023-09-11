@@ -62,8 +62,18 @@ class _RestaurantManageState extends State<RestaurantManage> {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (BuildContext context) =>
-                          const RestaurantDialogue(),
+                      builder: (BuildContext context) => RestaurantDialogue(
+                        state: 'add',
+                        details: Restaurant(
+                          resName: '',
+                          resRegNo: '',
+                          resContactNo: '',
+                          resRegDate: '',
+                          resAddress: '',
+                          resPhiArea: '',
+                        ),
+                        onReloadRestaurants: getRestaurants,
+                      ),
                     );
                   },
                   backgroundColor: Color(0xFFE2582C),

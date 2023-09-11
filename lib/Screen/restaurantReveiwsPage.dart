@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:sized_box_test/Api/api.dart';
 import 'package:sized_box_test/Components/reviewItem.dart';
+import 'package:sized_box_test/Screen/addReviewDialog.dart';
 import 'package:sized_box_test/models/restaurant.dart';
 import 'package:sized_box_test/models/review.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,6 +24,8 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
 
   getReviews() async {
     List<Review> response = await getReviewsCall();
+    print('review body');
+    print(response);
     setState(() {
       reviews = response;
     });
@@ -113,7 +116,14 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                             right: 20,
                             bottom: 20,
                             child: FloatingActionButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AddReviewDialogue(
+                                          reloadReviews: getReviews),
+                                );
+                              },
                               backgroundColor: Color(0xFFE2582C),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(100)),

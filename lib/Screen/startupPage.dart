@@ -69,6 +69,7 @@ class _StartupPageState extends State<StartupPage> {
                   //Header Container
                   const NavBar(
                     showLoginSignup: true,
+                    showLogout: false,
                   ),
                   //Body Container
                   Expanded(
