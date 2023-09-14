@@ -6,6 +6,7 @@ class InputField extends StatefulWidget {
   final String mode;
   final String labelText;
   final String initialValue;
+  final bool readOnly;
   final Function onChange;
   final TextEditingController? controller;
   final Function? validator;
@@ -17,6 +18,7 @@ class InputField extends StatefulWidget {
       required this.type,
       this.mode = 'add',
       this.initialValue = '',
+      this.readOnly = false,
       required this.labelText,
       required this.onChange,
       this.minMultilines = 1,
@@ -166,7 +168,8 @@ class _InputFieldState extends State<InputField> {
                         ? null
                         : const BoxConstraints(maxHeight: 70, minHeight: 70),
                     filled: true,
-                    fillColor: const Color.fromARGB(0, 255, 211, 186),
+                    //fillColor: const Color.fromARGB(0, 255, 211, 186),
+                    fillColor: Color.fromARGB(8, 255, 211, 186),
                   ),
                 ),
               ),
@@ -291,11 +294,15 @@ class _InputFieldState extends State<InputField> {
                                   BorderRadius.all(Radius.circular(10)),
                               borderSide: BorderSide(
                                   width: 2, color: Color(0xFF96471A))),
-                          focusedBorder: const OutlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  const BorderRadius.all(Radius.circular(10)),
                               borderSide: BorderSide(
-                                  width: 2, color: Color(0xFF96471A))),
+                                width: 2,
+                                color: widget.readOnly
+                                    ? Color.fromARGB(160, 150, 71, 26)
+                                    : Color(0xFF96471A),
+                              )),
                           border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -312,8 +319,12 @@ class _InputFieldState extends State<InputField> {
                               : const BoxConstraints(
                                   maxHeight: 70, minHeight: 70),
                           filled: true,
-                          fillColor: const Color.fromARGB(0, 255, 211, 186),
+                          //fillColor: const Color.fromARGB(0, 255, 211, 186),
+                          fillColor: widget.readOnly
+                              ? Color.fromARGB(54, 128, 87, 76)
+                              : Color.fromARGB(0, 66, 25, 1),
                         ),
+                        readOnly: widget.readOnly,
                       ),
                     ),
                   ],

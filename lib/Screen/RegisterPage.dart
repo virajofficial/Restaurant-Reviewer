@@ -1,12 +1,12 @@
 import 'dart:ui';
-import 'package:sized_box_test/Screen/loginPage.dart';
+import 'package:restaurant_reviewer/Screen/loginPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sized_box_test/Components/footer.dart';
-import 'package:sized_box_test/Components/inputField.dart';
-import 'package:sized_box_test/Components/navbar.dart';
+import 'package:restaurant_reviewer/Components/footer.dart';
+import 'package:restaurant_reviewer/Components/inputField.dart';
+import 'package:restaurant_reviewer/Components/navbar.dart';
 
 import '../Api/api.dart';
 
@@ -78,6 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   //Body Container
                   Expanded(
                     child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       alignment: Alignment.center,
                       child: Container(
                         alignment: Alignment.center,

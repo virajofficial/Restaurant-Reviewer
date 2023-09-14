@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Screen/phiDialog.dart';
-import 'package:sized_box_test/models/phi.dart';
-import 'package:sized_box_test/models/restaurant.dart';
+import 'package:restaurant_reviewer/Screen/phiDialog.dart';
+import 'package:restaurant_reviewer/models/phi.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
 
 import '../Screen/reviewDialog.dart';
 
 class PhiItem extends StatelessWidget {
-  const PhiItem({super.key, required this.phi});
+  const PhiItem({super.key, required this.phi, required this.reloadPhi});
 
   final Phi phi;
+  final Function reloadPhi;
 
   void dummyGetPhis() {}
 
@@ -40,6 +41,9 @@ class PhiItem extends StatelessWidget {
               children: [
                 Text(
                   phi.phiName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -70,6 +74,7 @@ class PhiItem extends StatelessWidget {
                     builder: (BuildContext context) => PhiDialogue(
                         state: 'edit',
                         details: Phi(
+                          phiId: phi.phiId,
                           phiAddress: phi.phiAddress,
                           phiArea: phi.phiArea,
                           phiContactNo: phi.phiContactNo,
@@ -77,7 +82,7 @@ class PhiItem extends StatelessWidget {
                           phiName: phi.phiName,
                           phiRegNo: phi.phiRegNo,
                         ),
-                        reloadPhis: dummyGetPhis),
+                        reloadPhis: reloadPhi),
                   );
                 },
                 child: Container(

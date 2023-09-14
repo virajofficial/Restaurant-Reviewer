@@ -3,10 +3,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sized_box_test/Api/api.dart';
-import 'package:sized_box_test/Components/SearchableDropDown.dart';
-import 'package:sized_box_test/Screen/phiManage.dart';
-import 'package:sized_box_test/models/phi.dart';
+import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/SearchableDropDown.dart';
+import 'package:restaurant_reviewer/Screen/phiManage.dart';
+import 'package:restaurant_reviewer/models/phi.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
@@ -43,6 +43,17 @@ class _MyWidgetState extends State<PhiDialogue> {
   final _popupCustomValidationKey = GlobalKey<DropdownSearchState<int>>();
   final PHIManage ani = PHIManage();
 
+  @override
+  void initState() {
+    phiName = widget.details.phiName;
+    phiRegNo = widget.details.phiRegNo;
+    phiEmail = widget.details.phiEmail;
+    phiContactNo = widget.details.phiContactNo;
+    phiAddress = widget.details.phiAddress;
+    phiArea = widget.details.phiArea;
+    super.initState();
+  }
+
   handleAddPhi() async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -58,7 +69,46 @@ class _MyWidgetState extends State<PhiDialogue> {
       } catch (error) {
         if (error is DioException) {
           print(error.response);
-          showMyDialog('Unable to login', error.response?.data['message']);
+          showMyDialog('Unable to Add PHI', error.response?.data['message']);
+        }
+        return;
+      }
+    }
+  }
+
+  handleEditPhi() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        var editPhiResponse = await editPHICall(
+            widget.details.phiId, phiName, phiContactNo, phiAddress, phiArea);
+        if (editPhiResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          widget.reloadPhis();
+        }
+      } catch (error) {
+        if (error is DioException) {
+          print(error.response);
+          showMyDialog('Unable to Edit PHI', error.response?.data['message']);
+        }
+        return;
+      }
+    }
+  }
+
+  handleRemovePhi() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        var removePhiResponse = await removePHICall(widget.details.phiId);
+        if (removePhiResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          widget.reloadPhis();
+        }
+      } catch (error) {
+        if (error is DioException) {
+          print(error.response);
+          showMyDialog('Unable to Remove PHI', error.response?.data['message']);
         }
         return;
       }
@@ -349,6 +399,7 @@ class _MyWidgetState extends State<PhiDialogue> {
                         type: 'text',
                         labelText: 'PHI Reg No',
                         initialValue: widget.details.phiRegNo,
+                        readOnly: true,
                         onChange: (value) {
                           setState(() {
                             phiRegNo = value;
@@ -360,6 +411,7 @@ class _MyWidgetState extends State<PhiDialogue> {
                         type: 'email',
                         labelText: 'Email',
                         initialValue: widget.details.phiEmail,
+                        readOnly: true,
                         onChange: (value) {
                           setState(() {
                             phiEmail = value;
@@ -423,7 +475,7 @@ class _MyWidgetState extends State<PhiDialogue> {
                                   gradient: LinearGradient(
                                     colors: [
                                       Color.fromARGB(255, 255, 178, 133),
-                                      Color.fromARGB(255, 134, 87, 61)
+                                      Color.fromARGB(255, 175, 117, 85)
                                     ],
                                   ),
                                   boxShadow: [
@@ -450,7 +502,7 @@ class _MyWidgetState extends State<PhiDialogue> {
                                         BorderRadius.all(Radius.circular(10)),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: handleEditPhi,
                                 child: const Text(
                                   'Save Changes',
                                   style: TextStyle(
@@ -497,7 +549,7 @@ class _MyWidgetState extends State<PhiDialogue> {
                                         BorderRadius.all(Radius.circular(10)),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: handleRemovePhi,
                                 child: const Text(
                                   'Remove',
                                   style: TextStyle(

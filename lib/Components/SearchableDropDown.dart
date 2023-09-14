@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
 
 import '../Api/api.dart';
 
@@ -25,6 +26,9 @@ class SearchableDropdown extends StatefulWidget {
 
 class _SearchableDropdownState extends State<SearchableDropdown> {
   List<String> phiAreas = [];
+  List<Restaurant> restaurants = [];
+  List<String> restaurantNames = [];
+  List<int> resId = [];
 
   getPhiAreas() async {
     List<String> response = await getPHIAreasCall();
@@ -33,8 +37,24 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
     });
   }
 
+  getRestaurants() async {
+    List<Restaurant> response = await getRestaurantsCall();
+    setState(() {
+      restaurants = response;
+      for (int i = 0; i < restaurants.length; i++) {
+        restaurantNames.add(restaurants[i].resName);
+      }
+    });
+  }
+
+  String getRestaurantId(String value) {
+    int index = restaurantNames.indexOf(value);
+    return restaurants[index].resId.toString();
+  }
+
   @override
   void initState() {
+    getRestaurants();
     getPhiAreas();
     super.initState();
   }
@@ -95,7 +115,8 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
 
                 //disabledItemFn: (String s) => s.startsWith('C'),
               ),
-              items: phiAreas,
+              //items: phiAreas,
+              items: (widget.type == 'resNames') ? restaurantNames : phiAreas,
               dropdownDecoratorProps: DropDownDecoratorProps(
                 baseStyle: const TextStyle(
                   fontStyle: FontStyle.italic,
@@ -132,7 +153,9 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
                 ),
               ),
               onChanged: (value) {
-                widget.onChange(value);
+                (widget.type == 'resNames')
+                    ? widget.onChange(getRestaurantId(value!))
+                    : widget.onChange(value);
               },
             ),
           )

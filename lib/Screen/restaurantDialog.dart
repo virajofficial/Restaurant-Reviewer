@@ -2,9 +2,9 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Api/api.dart';
-import 'package:sized_box_test/Components/SearchableDropDown.dart';
-import 'package:sized_box_test/models/restaurant.dart';
+import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/SearchableDropDown.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
@@ -41,6 +41,17 @@ class _MyWidgetState extends State<RestaurantDialogue> {
 
   final _popupCustomValidationKey = GlobalKey<DropdownSearchState<int>>();
 
+  @override
+  void initState() {
+    resName = widget.details.resName;
+    resRegNo = widget.details.resRegNo;
+    resContactNo = widget.details.resContactNo;
+    resRegDate = widget.details.resRegDate;
+    resAddress = widget.details.resAddress;
+    resPhiArea = widget.details.resPhiArea;
+    super.initState();
+  }
+
   handleAddRestaurant() async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -58,7 +69,50 @@ class _MyWidgetState extends State<RestaurantDialogue> {
         print(error);
         if (error is DioException) {
           print(error.response);
-          showMyDialog('Unable to login', error.response?.data['message']);
+          showMyDialog(
+              'Unable to Add Restaurant', error.response?.data['message']);
+        }
+        return;
+      }
+    }
+  }
+
+  handleEditRestaurant() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        var editResResponse = await editRestaurantCall(widget.details.resId,
+            resName, resContactNo, resAddress, resPhiArea);
+        if (editResResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          widget.onReloadRestaurants();
+        }
+      } catch (error) {
+        if (error is DioException) {
+          print(error.response);
+          showMyDialog(
+              'Unable to Edit Restaurant', error.response?.data['message']);
+        }
+        return;
+      }
+    }
+  }
+
+  handleRemoveRestaurant() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        var removeResResponse =
+            await removeRestaurantCall(widget.details.resId);
+        if (removeResResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          widget.onReloadRestaurants();
+        }
+      } catch (error) {
+        if (error is DioException) {
+          print(error.response);
+          showMyDialog(
+              'Unable to Remove Restaurant', error.response?.data['message']);
         }
         return;
       }
@@ -347,6 +401,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                         mode: 'edit',
                         type: 'text',
                         labelText: 'Restaurant Reg No',
+                        readOnly: true,
                         initialValue: widget.details.resRegNo,
                         onChange: (value) {
                           setState(() {
@@ -374,7 +429,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                           )
                         ],
                       ),
-                      DatePicker(
+                      /*DatePicker(
                         mode: 'edit',
                         initialValue: widget.details.resRegDate,
                         labelText: 'Restaurant Reg Date',
@@ -386,6 +441,19 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                           });
                         },
                         type: 'dateTime',
+                      ),*/
+                      InputField(
+                        mode: 'edit',
+                        type: 'text',
+                        labelText: 'Restaurant Reg Date',
+                        readOnly: true,
+                        initialValue:
+                            widget.details.resRegDate.substring(0, 10),
+                        onChange: (value) {
+                          setState(() {
+                            resAddress = value;
+                          });
+                        },
                       ),
                       InputField(
                         mode: 'edit',
@@ -424,7 +492,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                                   gradient: LinearGradient(
                                     colors: [
                                       Color.fromARGB(255, 255, 178, 133),
-                                      Color.fromARGB(255, 134, 87, 61)
+                                      Color.fromARGB(255, 175, 117, 85)
                                     ],
                                   ),
                                   boxShadow: [
@@ -451,7 +519,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                                         BorderRadius.all(Radius.circular(10)),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: handleEditRestaurant,
                                 child: const Text(
                                   'Save Changes',
                                   style: TextStyle(
@@ -498,7 +566,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                                         BorderRadius.all(Radius.circular(10)),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: handleRemoveRestaurant,
                                 child: const Text(
                                   'Remove',
                                   style: TextStyle(

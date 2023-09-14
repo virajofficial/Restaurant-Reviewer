@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Api/api.dart';
-import 'package:sized_box_test/Components/restaurantItem.dart';
-import 'package:sized_box_test/Screen/restaurantDialog.dart';
-import 'package:sized_box_test/models/restaurant.dart';
+import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/restaurantItem.dart';
+import 'package:restaurant_reviewer/Screen/restaurantDialog.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
 
 class RestaurantManage extends StatefulWidget {
   const RestaurantManage({super.key});
@@ -51,6 +51,7 @@ class _RestaurantManageState extends State<RestaurantManage> {
                   shrinkWrap: true,
                   itemCount: restaurants.length,
                   itemBuilder: (context, index) => RestaurantItem(
+                    reloadRes: getRestaurants,
                     restaurant: restaurants[index],
                   ),
                 ),

@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sized_box_test/Screen/RegisterPage.dart';
-import 'package:sized_box_test/Screen/loginPage.dart';
-import 'package:sized_box_test/Screen/startupPage.dart';
+import 'package:restaurant_reviewer/Screen/RegisterPage.dart';
+import 'package:restaurant_reviewer/Screen/loginPage.dart';
+import 'package:restaurant_reviewer/Screen/startupPage.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar(
@@ -146,7 +146,7 @@ class NavBar extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       ),
                     )
-                  : SizedBox(width: 0),
+                  : Container(),
         ],
       ),
     );

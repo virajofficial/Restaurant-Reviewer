@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Components/sideBarItem.dart';
+import 'package:restaurant_reviewer/Components/sideBarItem.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar(

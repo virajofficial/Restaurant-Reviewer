@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Components/alertDialog.dart';
+import 'package:restaurant_reviewer/Components/alertDialog.dart';
 
-// components
-import 'package:sized_box_test/Screen/startupPage.dart';
+import 'package:restaurant_reviewer/Screen/startupPage.dart';
 
 void main() {
   runApp(MaterialApp(

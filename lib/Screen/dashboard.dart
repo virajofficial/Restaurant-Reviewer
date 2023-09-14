@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Components/footer.dart';
-import 'package:sized_box_test/Components/navbar.dart';
-import 'package:sized_box_test/Components/sideBar.dart';
-import 'package:sized_box_test/Screen/phiManage.dart';
-import 'package:sized_box_test/Screen/restaurantManage.dart';
+import 'package:restaurant_reviewer/Components/footer.dart';
+import 'package:restaurant_reviewer/Components/navbar.dart';
+import 'package:restaurant_reviewer/Components/sideBar.dart';
+import 'package:restaurant_reviewer/Screen/phiManage.dart';
+import 'package:restaurant_reviewer/Screen/restaurantManage.dart';
 
 import '../Api/api.dart';
 

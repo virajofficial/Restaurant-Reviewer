@@ -1,4 +1,4 @@
-import 'package:sized_box_test/models/restaurant.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
 
 class Review {
   final String review;

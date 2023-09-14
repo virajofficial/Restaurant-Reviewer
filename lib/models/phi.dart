@@ -1,4 +1,7 @@
+import 'package:intl/intl.dart';
+
 class Phi {
+  final int phiId;
   final String phiName;
   final String phiRegNo;
   final String phiEmail;
@@ -7,6 +10,7 @@ class Phi {
   final String phiArea;
 
   Phi({
+    this.phiId = 0,
     required this.phiName,
     required this.phiRegNo,
     required this.phiEmail,
@@ -16,7 +20,10 @@ class Phi {
   });
 
   factory Phi.fromJson(Map<String, dynamic> parsedJson) {
+    print('Parsed JSON **************************');
+    print(parsedJson);
     return Phi(
+      phiId: parsedJson['id'],
       phiName: parsedJson['phiName'],
       phiRegNo: parsedJson['registrationNo'],
       phiEmail: parsedJson['email'],

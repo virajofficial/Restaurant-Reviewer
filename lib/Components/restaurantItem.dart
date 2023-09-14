@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Screen/restaurantDialog.dart';
-import 'package:sized_box_test/models/restaurant.dart';
+import 'package:restaurant_reviewer/Screen/restaurantDialog.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
 
 class RestaurantItem extends StatelessWidget {
-  const RestaurantItem({super.key, required this.restaurant});
+  const RestaurantItem(
+      {super.key, required this.restaurant, required this.reloadRes});
 
   final Restaurant restaurant;
-
-  void dummyRestaurantsList() {}
+  final Function reloadRes;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,9 @@ class RestaurantItem extends StatelessWidget {
               children: [
                 Text(
                   restaurant.resName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
                   style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -67,6 +70,7 @@ class RestaurantItem extends StatelessWidget {
                     builder: (BuildContext context) => RestaurantDialogue(
                         state: 'edit',
                         details: Restaurant(
+                          resId: restaurant.resId,
                           resName: restaurant.resName,
                           resRegNo: restaurant.resRegNo,
                           resContactNo: restaurant.resContactNo,
@@ -74,7 +78,7 @@ class RestaurantItem extends StatelessWidget {
                           resAddress: restaurant.resAddress,
                           resPhiArea: restaurant.resPhiArea,
                         ),
-                        onReloadRestaurants: dummyRestaurantsList),
+                        onReloadRestaurants: reloadRes),
                   );
                 },
                 child: Container(

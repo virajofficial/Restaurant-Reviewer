@@ -3,10 +3,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sized_box_test/Components/footer.dart';
-import 'package:sized_box_test/Components/navbar.dart';
-import 'package:sized_box_test/Screen/dashboard.dart';
-import 'package:sized_box_test/Screen/restaurantReveiwsPage.dart';
+import 'package:restaurant_reviewer/Components/footer.dart';
+import 'package:restaurant_reviewer/Components/navbar.dart';
+import 'package:restaurant_reviewer/Screen/dashboard.dart';
+import 'package:restaurant_reviewer/Screen/restaurantReveiwsPage.dart';
 
 class StartupPage extends StatefulWidget {
   const StartupPage({super.key});
@@ -74,7 +74,10 @@ class _StartupPageState extends State<StartupPage> {
                   //Body Container
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 30,
+                      ),
                       child: Column(
                         children: <Widget>[
                           const SizedBox(

@@ -1,16 +1,16 @@
 import 'dart:ui';
 import 'package:dio/dio.dart';
-import 'package:sized_box_test/Api/api.dart';
-import 'package:sized_box_test/Components/alertDialog.dart';
-import 'package:sized_box_test/Screen/RegisterPage.dart';
-import 'package:sized_box_test/Screen/dashboard.dart';
-import 'package:sized_box_test/Screen/restaurantReveiwsPage.dart';
+import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/alertDialog.dart';
+import 'package:restaurant_reviewer/Screen/RegisterPage.dart';
+import 'package:restaurant_reviewer/Screen/dashboard.dart';
+import 'package:restaurant_reviewer/Screen/restaurantReveiwsPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Components/footer.dart';
-import 'package:sized_box_test/Components/inputField.dart';
-import 'package:sized_box_test/Components/navbar.dart';
+import 'package:restaurant_reviewer/Components/footer.dart';
+import 'package:restaurant_reviewer/Components/inputField.dart';
+import 'package:restaurant_reviewer/Components/navbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

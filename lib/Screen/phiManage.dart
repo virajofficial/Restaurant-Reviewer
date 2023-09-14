@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Screen/phiDialog.dart';
-import 'package:sized_box_test/Components/phiItem.dart';
-import 'package:sized_box_test/models/phi.dart';
+import 'package:intl/intl.dart';
+import 'package:restaurant_reviewer/Screen/phiDialog.dart';
+import 'package:restaurant_reviewer/Components/phiItem.dart';
+import 'package:restaurant_reviewer/models/phi.dart';
 
 import '../Api/api.dart';
 
@@ -19,6 +20,7 @@ class _PHIManageState extends State<PHIManage> {
 
   getPhis() async {
     List<Phi> response = await getPhisCall();
+
     setState(() {
       phis = response;
     });
@@ -54,6 +56,7 @@ class _PHIManageState extends State<PHIManage> {
                   itemCount: phis.length,
                   itemBuilder: (context, index) => PhiItem(
                     phi: phis[index],
+                    reloadPhi: getPhis,
                   ),
                 ),
               ),

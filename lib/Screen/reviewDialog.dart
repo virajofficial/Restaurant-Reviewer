@@ -17,22 +17,25 @@ class ReviewDialog extends StatelessWidget {
       content: Container(
         width: 500,
         height: 500,
-        color: Colors.transparent,
+        decoration: BoxDecoration(
+          gradient: RadialGradient(colors: const [
+            Color.fromARGB(255, 194, 147, 102),
+            Color.fromARGB(255, 216, 170, 139),
+          ]),
+          borderRadius: BorderRadius.circular(10),
+        ),
         constraints: const BoxConstraints(
-          minHeight: 500,
+          minHeight: 600,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Container(
               width: double.maxFinite,
-              height: 80,
+              height: 90,
               decoration: const BoxDecoration(
-                  gradient: RadialGradient(colors: [
-                    Color(0xFFDB9452),
-                    Color(0xFFDF8B3D),
-                  ]),
-                  border: Border(
+                color: Colors.transparent,
+                /*border: Border(
                     left: BorderSide(
                       color: Color(0xFFBD712B),
                       width: 3,
@@ -45,21 +48,23 @@ class ReviewDialog extends StatelessWidget {
                       color: Color(0xFFBD712B),
                       width: 3,
                     ),
-                  ),
-                  // borderRadius: BorderRadius.only(
-                  //   topLeft: Radius.circular(10),
-                  //   topRight: Radius.circular(10),
-                  // ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromARGB(150, 0, 0, 0),
-                      blurStyle: BlurStyle.outer,
-                      offset: Offset(0, 00.1),
-                      blurRadius: 3,
-                    ),
-                  ]),
+                  ),*/
+                // borderRadius: BorderRadius.only(
+                //   topLeft: Radius.circular(10),
+                //   topRight: Radius.circular(10),
+                // ),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Color.fromARGB(150, 0, 0, 0),
+                //     blurStyle: BlurStyle.outer,
+                //     offset: Offset(0, 00.1),
+                //     blurRadius: 3,
+                //   ),
+                // ],
+              ),
               child: Container(
-                padding: const EdgeInsets.all(5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -110,92 +115,72 @@ class ReviewDialog extends StatelessWidget {
               ),
             ),
             Container(
-                width: double.maxFinite,
-                height: 412,
-                decoration: const BoxDecoration(
-                    gradient: RadialGradient(
-                      colors: [
-                        Color(0xFFF1C9A5),
-                        Color.fromARGB(255, 239, 177, 123)
-                      ],
-                    ),
-                    border: Border(
-                      left: BorderSide(
-                        color: Color(0xFFBD712B),
-                        width: 3,
-                      ),
-                      right: BorderSide(
-                        color: Color(0xFFBD712B),
-                        width: 3,
-                      ),
-                      bottom: BorderSide(
-                        color: Color(0xFFBD712B),
-                        width: 3,
-                      ),
-                    ),
-                    // borderRadius: BorderRadius.only(
-                    //   bottomLeft: Radius.circular(10),
-                    //   bottomRight: Radius.circular(10),
-                    // ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(150, 0, 0, 0),
-                        blurStyle: BlurStyle.outer,
-                        offset: Offset(0, 00.1),
+              height: 10,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 126, 90, 60),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                  left: 40,
+                  right: 40,
+                  top: 20,
+                  bottom: 20,
+                ),
+                child: Container(
+                  width: double.maxFinite,
+                  child: Text(
+                    review.review,
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 255, 71, 71),
+                      Color.fromARGB(255, 255, 0, 0)
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Color.fromARGB(255, 141, 0, 0),
+                        spreadRadius: 2,
+                        blurStyle: BlurStyle.inner,
                         blurRadius: 3,
-                      ),
-                    ]),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding: EdgeInsets.only(
-                          left: 60,
-                          right: 60,
-                          top: 20,
-                          bottom: 20,
-                        ),
-                        child: Container(
-                          width: double.maxFinite,
-                          child: Text(
-                            review.review,
-                            textAlign: TextAlign.justify,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: 380,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFFA83131)),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    )
+                        offset: Offset(1, 2)),
                   ],
-                ))
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  //elevation: 5,
+                  minimumSize: const Size(370, 50),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 20, letterSpacing: 2),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),

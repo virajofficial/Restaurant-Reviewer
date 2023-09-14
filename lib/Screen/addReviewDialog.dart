@@ -2,8 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Api/api.dart';
-import 'package:sized_box_test/Components/SearchableDropDown.dart';
+import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/SearchableDropDown.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
@@ -34,7 +34,7 @@ class _MyWidgetState extends State<AddReviewDialogue> {
     if (_formKey.currentState!.validate()) {
       try {
         var addPhiResponse =
-            await addReviewCall(1.toString(), review, 'good', phiArea);
+            await addReviewCall(restaurant, review, 'good', phiArea);
         print('Add PHI Res = ');
         print(addPhiResponse);
         if (addPhiResponse['success'] = true) {
@@ -107,7 +107,7 @@ class _MyWidgetState extends State<AddReviewDialogue> {
                   height: 10,
                 ),
                 SearchableDropdown(
-                    type: 'searchableDD',
+                    type: 'resNames',
                     labelText: 'Select A Restaurant',
                     onChange: (value) {
                       setState(() {

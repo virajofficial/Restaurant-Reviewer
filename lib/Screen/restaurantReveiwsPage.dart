@@ -1,16 +1,16 @@
 import 'dart:ui';
-import 'package:sized_box_test/Api/api.dart';
-import 'package:sized_box_test/Components/reviewItem.dart';
-import 'package:sized_box_test/Screen/addReviewDialog.dart';
-import 'package:sized_box_test/models/restaurant.dart';
-import 'package:sized_box_test/models/review.dart';
+import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/reviewItem.dart';
+import 'package:restaurant_reviewer/Screen/addReviewDialog.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
+import 'package:restaurant_reviewer/models/review.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sized_box_test/Components/footer.dart';
-import 'package:sized_box_test/Components/inputField.dart';
-import 'package:sized_box_test/Components/navbar.dart';
+import 'package:restaurant_reviewer/Components/footer.dart';
+import 'package:restaurant_reviewer/Components/inputField.dart';
+import 'package:restaurant_reviewer/Components/navbar.dart';
 
 class RestaurantReviewsPage extends StatefulWidget {
   const RestaurantReviewsPage({super.key});
@@ -21,6 +21,7 @@ class RestaurantReviewsPage extends StatefulWidget {
 
 class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
   List<Review> reviews = [];
+  List<Restaurant> restaurants = [];
 
   getReviews() async {
     List<Review> response = await getReviewsCall();

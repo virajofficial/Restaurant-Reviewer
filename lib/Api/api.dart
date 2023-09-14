@@ -3,9 +3,9 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sized_box_test/models/pihArea.dart';
-import 'package:sized_box_test/models/restaurant.dart';
-import 'package:sized_box_test/models/review.dart';
+import 'package:restaurant_reviewer/models/pihArea.dart';
+import 'package:restaurant_reviewer/models/restaurant.dart';
+import 'package:restaurant_reviewer/models/review.dart';
 
 import '../models/phi.dart';
 
@@ -88,7 +88,12 @@ Future<List<Restaurant>> getRestaurantsCall() async {
 
 Future<List<Phi>> getPhisCall() async {
   var response = await callApi('GET', '/phi-details', null);
-  return List<Phi>.from(response['data'].map((x) => Phi.fromJson(x)));
+  if (response != null && response is! DioException) {
+    print("PHI AREAS RES *********************");
+    return List<Phi>.from(response['data'].map((x) => Phi.fromJson(x)));
+  } else {
+    throw response;
+  }
 }
 
 Future<List<Review>> getReviewsCall() async {
@@ -120,6 +125,44 @@ Future<dynamic> addRestaurantCall(
   }
 }
 
+Future<dynamic> editRestaurantCall(
+  int resId,
+  String resName,
+  String resContactNo,
+  String resAddress,
+  String resPhiArea,
+) async {
+  print('resturant id');
+  print(resId);
+  var response = await callApi('PUT', '/restaurant-details/$resId', {
+    "restaurantName": resName,
+    "contactNumber": resContactNo,
+    "address": resAddress,
+    "phiArea": resPhiArea
+  });
+
+  if (response != null && response is! DioException) {
+    print('editing restaurant data');
+    print(response);
+    return response['data'];
+  } else {
+    throw response;
+  }
+}
+
+Future<dynamic> removeRestaurantCall(
+  int resId,
+) async {
+  var response = await callApi('PUT', '/restaurant-details/$resId', {
+    "active": false,
+  });
+  if (response != null && response is! DioException) {
+    return response['data'];
+  } else {
+    throw response;
+  }
+}
+
 Future<dynamic> addPHICall(
   String phiName,
   String registrationNo,
@@ -135,6 +178,39 @@ Future<dynamic> addPHICall(
     "contactNumber": contactNo,
     "address": address,
     "phiArea": phiArea
+  });
+  if (response != null && response is! DioException) {
+    return response['data'];
+  } else {
+    throw response;
+  }
+}
+
+Future<dynamic> editPHICall(
+  int phiId,
+  String phiName,
+  String contactNo,
+  String address,
+  String phiArea,
+) async {
+  var response = await callApi('PUT', '/phi-details/$phiId', {
+    "phiName": phiName,
+    "contactNumber": contactNo,
+    "address": address,
+    "phiArea": phiArea
+  });
+  if (response != null && response is! DioException) {
+    return response['data'];
+  } else {
+    throw response;
+  }
+}
+
+Future<dynamic> removePHICall(
+  int phiId,
+) async {
+  var response = await callApi('PUT', '/phi-details/$phiId', {
+    "active": false,
   });
   if (response != null && response is! DioException) {
     return response['data'];

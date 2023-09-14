@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sized_box_test/Screen/reviewDialog.dart';
-import 'package:sized_box_test/models/review.dart';
+import 'package:restaurant_reviewer/Screen/reviewDialog.dart';
+import 'package:restaurant_reviewer/models/review.dart';
 
 class ReviewItem extends StatelessWidget {
   const ReviewItem({super.key, required this.review});
