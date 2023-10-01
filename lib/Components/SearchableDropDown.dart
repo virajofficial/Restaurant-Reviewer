@@ -65,14 +65,14 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
         ? Padding(
             //*******************************************************************************************add Searchable Input
             padding: const EdgeInsets.symmetric(
-              horizontal: 60,
-              vertical: 16,
+              horizontal: 30,
+              vertical: 5,
             ),
             child: DropdownSearch<String>(
               popupProps: const PopupProps.menu(
                 showSelectedItems: true,
                 showSearchBox: true,
-                fit: FlexFit.loose,
+                //fit: FlexFit.loose,
                 searchFieldProps: TextFieldProps(
                   autofocus: true,
                   cursorColor: Color.fromARGB(204, 150, 71, 26),
@@ -102,7 +102,7 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
                   ),
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
-                    color: Color(0xFFAA684B),
+                    color: Color.fromARGB(255, 136, 83, 60),
                   ),
                 ),
 
@@ -162,21 +162,23 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
         : Padding(
             //*******************************************************************************************Edit Searchable Input
             padding: const EdgeInsets.symmetric(
-              horizontal: 60,
-              vertical: 16,
+              horizontal: 30,
+              vertical: 5,
             ),
             child: Row(
               children: [
-                Container(
-                  width: 100,
-                  child: Text(
-                    '${widget.labelText}:',
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 168, 88, 41),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+                MediaQuery.of(context).size.width > 490
+                    ? Container(
+                        width: 100,
+                        child: Text(
+                          '${widget.labelText}:',
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 168, 88, 41),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    : Container(),
                 Expanded(
                   child: DropdownSearch<String>(
                     popupProps: const PopupProps.menu(
@@ -216,7 +218,7 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
                         ),
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
-                          color: Color(0xFFAA684B),
+                          color: Color.fromARGB(255, 134, 82, 59),
                         ),
                       ),
 

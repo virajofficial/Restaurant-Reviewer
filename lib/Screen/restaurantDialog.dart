@@ -10,7 +10,6 @@ import 'package:dropdown_search/dropdown_search.dart';
 
 import '../Components/alertDialog.dart';
 import '../Components/datePicker.dart';
-import 'RegisterPage.dart';
 import '../Components/inputField.dart';
 
 class RestaurantDialogue extends StatefulWidget {
@@ -69,8 +68,8 @@ class _MyWidgetState extends State<RestaurantDialogue> {
         print(error);
         if (error is DioException) {
           print(error.response);
-          showMyDialog(
-              'Unable to Add Restaurant', error.response?.data['message']);
+          showMyDialog('Unable to Add Restaurant',
+              error.response?.data['message'], () {});
         }
         return;
       }
@@ -90,8 +89,8 @@ class _MyWidgetState extends State<RestaurantDialogue> {
       } catch (error) {
         if (error is DioException) {
           print(error.response);
-          showMyDialog(
-              'Unable to Edit Restaurant', error.response?.data['message']);
+          showMyDialog('Unable to Edit Restaurant',
+              error.response?.data['message'], () {});
         }
         return;
       }
@@ -111,8 +110,8 @@ class _MyWidgetState extends State<RestaurantDialogue> {
       } catch (error) {
         if (error is DioException) {
           print(error.response);
-          showMyDialog(
-              'Unable to Remove Restaurant', error.response?.data['message']);
+          showMyDialog('Unable to Remove Restaurant',
+              error.response?.data['message'], () {});
         }
         return;
       }
@@ -206,9 +205,11 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                               },
                             ),
                           ),
-                          SizedBox(
-                            width: 100,
-                          )
+                          MediaQuery.of(context).size.width > 490
+                              ? SizedBox(
+                                  width: 100,
+                                )
+                              : Container(),
                         ],
                       ),
                       DatePicker(
@@ -364,23 +365,26 @@ class _MyWidgetState extends State<RestaurantDialogue> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        widget.details.resName,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          shadows: [
-                            BoxShadow(
-                              blurRadius: 3,
-                              blurStyle: BlurStyle.outer,
-                              color: Color.fromARGB(50, 0, 0, 0),
-                            )
-                          ],
-                          letterSpacing: 3,
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: Text(
+                          widget.details.resName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: const TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            shadows: [
+                              BoxShadow(
+                                blurRadius: 3,
+                                blurStyle: BlurStyle.outer,
+                                color: Color.fromARGB(50, 0, 0, 0),
+                              )
+                            ],
+                            letterSpacing: 3,
+                          ),
                         ),
                       ),
                       const SizedBox(

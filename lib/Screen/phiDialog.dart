@@ -11,7 +11,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
 import '../Components/alertDialog.dart';
-import 'RegisterPage.dart';
 import '../Components/inputField.dart';
 import 'dashboard.dart';
 
@@ -69,7 +68,8 @@ class _MyWidgetState extends State<PhiDialogue> {
       } catch (error) {
         if (error is DioException) {
           print(error.response);
-          showMyDialog('Unable to Add PHI', error.response?.data['message']);
+          showMyDialog(
+              'Unable to Add PHI', error.response?.data['message'], () {});
         }
         return;
       }
@@ -89,7 +89,8 @@ class _MyWidgetState extends State<PhiDialogue> {
       } catch (error) {
         if (error is DioException) {
           print(error.response);
-          showMyDialog('Unable to Edit PHI', error.response?.data['message']);
+          showMyDialog(
+              'Unable to Edit PHI', error.response?.data['message'], () {});
         }
         return;
       }
@@ -108,7 +109,8 @@ class _MyWidgetState extends State<PhiDialogue> {
       } catch (error) {
         if (error is DioException) {
           print(error.response);
-          showMyDialog('Unable to Remove PHI', error.response?.data['message']);
+          showMyDialog(
+              'Unable to Remove PHI', error.response?.data['message'], () {});
         }
         return;
       }
@@ -122,7 +124,7 @@ class _MyWidgetState extends State<PhiDialogue> {
       backgroundColor: Colors.transparent,
       content: (widget.state == 'add')
           ? Container(
-              // **********************************************************************Edit Phi Dialouge
+              // **********************************************************************Add Phi Dialouge
               decoration: BoxDecoration(
                   gradient: RadialGradient(colors: const [
                     Color.fromARGB(255, 194, 147, 102),
@@ -211,9 +213,11 @@ class _MyWidgetState extends State<PhiDialogue> {
                               },
                             ),
                           ),
-                          SizedBox(
-                            width: 100,
-                          )
+                          MediaQuery.of(context).size.width > 490
+                              ? SizedBox(
+                                  width: 100,
+                                )
+                              : Container(),
                         ],
                       ),
                       InputField(
@@ -359,7 +363,7 @@ class _MyWidgetState extends State<PhiDialogue> {
                         height: 20,
                       ),
                       Container(
-                        width: 200,
+                        padding: EdgeInsets.symmetric(horizontal: 30),
                         child: Text(
                           widget.details.phiName,
                           maxLines: 1,
@@ -433,9 +437,11 @@ class _MyWidgetState extends State<PhiDialogue> {
                               },
                             ),
                           ),
-                          SizedBox(
-                            width: 80,
-                          )
+                          MediaQuery.of(context).size.width > 490
+                              ? SizedBox(
+                                  width: 80,
+                                )
+                              : Container(),
                         ],
                       ),
                       InputField(

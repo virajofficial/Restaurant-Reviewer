@@ -1,21 +1,31 @@
+import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:restaurant_reviewer/Screen/loginDialog.dart';
+import 'package:restaurant_reviewer/Screen/registerDialog.dart';
+import 'package:restaurant_reviewer/Screen/userProfileDialog.dart';
+import 'package:restaurant_reviewer/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:restaurant_reviewer/Screen/RegisterPage.dart';
-import 'package:restaurant_reviewer/Screen/loginPage.dart';
 import 'package:restaurant_reviewer/Screen/startupPage.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar(
-      {super.key,
-      this.showLoginSignup = false,
-      this.title = '',
-      this.showLogout = true});
+  const NavBar({
+    super.key,
+    this.showLoginSignup = false,
+    this.title = '',
+    this.showLogout = true,
+    this.userName = '',
+    this.showUsername = false,
+    required this.currentUser,
+  });
 
   final bool showLoginSignup;
   final bool showLogout;
+  final bool showUsername;
   final String title;
+  final String userName;
+  final User currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -37,31 +47,73 @@ class NavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-              child: Stack(
-            children: [
-              Opacity(
-                opacity: 0.3,
-                child: Image.asset(
-                  '../assets/images/Logo.png',
-                  color: const Color.fromARGB(255, 255, 255, 255),
+          MediaQuery.of(context).size.width > 500
+              ? Stack(
+                  children: [
+                    Opacity(
+                      opacity: 0.3,
+                      child: Image.asset(
+                        '../assets/images/Logo.png',
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                      ),
+                    ),
+                    ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                        child: Image.asset('../assets/images/Logo.png'),
+                      ),
+                    )
+                  ],
+                )
+              : Stack(
+                  children: [
+                    Opacity(
+                      opacity: 0.3,
+                      child: Image.asset(
+                        '../assets/images/Logo_Icon.png',
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                      ),
+                    ),
+                    ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                        child: Image.asset('../assets/images/Logo_Icon.png'),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                  child: Image.asset('../assets/images/Logo.png'),
-                ),
-              )
-            ],
-          )),
           MediaQuery.of(context).size.width > 800
-              ? Text(
-                  title,
-                  style: const TextStyle(
-                      color: Color.fromARGB(225, 227, 82, 0),
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700),
+              ? Expanded(
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Color.fromARGB(225, 227, 82, 0),
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700),
+                  ),
+                )
+              : Container(),
+          //Expanded(child: Container()),
+          showUsername
+              ? InkWell(
+                  child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        'Hi, ${currentUser.name}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 161, 91, 0),
+                        ),
+                      )),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => UserProfileDialog(
+                              userdata: currentUser,
+                            ));
+                  },
                 )
               : Container(),
           showLoginSignup
@@ -79,12 +131,10 @@ class NavBar extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterPage(),
-                          ),
-                        );
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                const RegisterDialog());
                       },
                       child: const Text(
                         'Register',
@@ -103,12 +153,10 @@ class NavBar extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginPage(),
-                          ),
-                        );
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                const LoginDialog());
                       },
                       child: const Text(
                         'Login',

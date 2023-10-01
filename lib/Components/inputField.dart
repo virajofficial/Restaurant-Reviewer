@@ -55,8 +55,8 @@ class _InputFieldState extends State<InputField> {
         ? Padding(
             // ***********************************************************************************************Adding form Input field
             padding: const EdgeInsets.symmetric(
-              horizontal: 60,
-              vertical: 10,
+              horizontal: 30,
+              vertical: 5,
             ),
             child: Material(
               color: Colors.transparent,
@@ -111,13 +111,14 @@ class _InputFieldState extends State<InputField> {
                       ? widget.maxMultilines
                       : widget.minMultilines,
                   style: const TextStyle(
-                    color: Color(0xFFAA684B),
+                    color: Color.fromARGB(255, 95, 58, 42),
                   ),
                   decoration: InputDecoration(
                     // hintText: (widget.type == "password" && invalidPassword)
                     //     ? 'should contain at least one upper case \nshould contain at least one lower case \nshould contain at least one digit \nshould contain at least one Special character'
                     //     : '',
                     // floatingLabelBehavior: FloatingLabelBehavior.auto,
+
                     alignLabelWithHint: true,
                     suffixIconColor: const Color.fromARGB(204, 150, 71, 26),
                     suffixIcon: (widget.type == "password")
@@ -164,6 +165,7 @@ class _InputFieldState extends State<InputField> {
                       fontStyle: FontStyle.italic,
                       color: Color(0xFFAA684B),
                     ),
+
                     constraints: (widget.type == "multiline")
                         ? null
                         : const BoxConstraints(maxHeight: 70, minHeight: 70),
@@ -178,8 +180,8 @@ class _InputFieldState extends State<InputField> {
         : Padding(
             //  ***********************************************************************************************Editing Form Input Field
             padding: EdgeInsets.symmetric(
-              horizontal: 60,
-              vertical: 10,
+              horizontal: 30,
+              vertical: 5,
             ),
             child: Material(
               color: Colors.transparent,
@@ -195,17 +197,19 @@ class _InputFieldState extends State<InputField> {
                 waitDuration: const Duration(milliseconds: 50),
                 child: Row(
                   children: [
-                    Container(
-                      width: 100,
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '${widget.labelText}:',
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 168, 88, 41),
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    MediaQuery.of(context).size.width > 490
+                        ? Container(
+                            width: 100,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '${widget.labelText}:',
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 168, 88, 41),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        : Container(),
                     Expanded(
                       child: TextFormField(
                         initialValue: widget.initialValue,
@@ -249,7 +253,7 @@ class _InputFieldState extends State<InputField> {
                             ? widget.maxMultilines
                             : widget.minMultilines,
                         style: const TextStyle(
-                          color: Color(0xFFAA684B),
+                          color: Color.fromARGB(255, 102, 62, 45),
                         ),
                         decoration: InputDecoration(
                           // hintText: (widget.type == "password" && invalidPassword)

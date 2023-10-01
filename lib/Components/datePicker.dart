@@ -40,8 +40,8 @@ class _InputFieldState extends State<DatePicker> {
         ? Padding(
             //**************************************************************************************Date picker Edit
             padding: const EdgeInsets.symmetric(
-              horizontal: 60,
-              vertical: 16,
+              horizontal: 30,
+              vertical: 5,
             ),
             child: Material(
               color: Colors.transparent,
@@ -57,10 +57,27 @@ class _InputFieldState extends State<DatePicker> {
                 ),
                 onTap: () async {
                   DateTime? pickeedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2024));
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2024),
+                    builder: (contex, child) {
+                      return Theme(
+                        data: ThemeData.dark().copyWith(
+                          colorScheme: const ColorScheme.dark(
+                            primary: Color.fromARGB(255, 255, 230, 0),
+                            onPrimary: Colors.red,
+                            surface: Color.fromARGB(224, 189, 83, 42),
+                            onSurface: Color.fromARGB(255, 255, 255, 255),
+                            onSurfaceVariant: Colors.yellow,
+                          ),
+                          dialogBackgroundColor:
+                              const Color.fromARGB(255, 253, 253, 253),
+                        ),
+                        child: child!,
+                      );
+                    },
+                  );
                   if (pickeedDate != null) {
                     String formattedDate =
                         DateFormat("yyyy-MM-dd").format(pickeedDate);

@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:restaurant_reviewer/Screen/phiDashboard.dart';
+import 'package:restaurant_reviewer/Screen/phiRestaurantReviewesPage.dart';
+import 'package:restaurant_reviewer/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:restaurant_reviewer/Components/footer.dart';
 import 'package:restaurant_reviewer/Components/navbar.dart';
@@ -36,6 +39,14 @@ class _StartupPageState extends State<StartupPage> {
           builder: (context) => const Dashboard(),
         ),
       );
+    } else if (userRole == 'phi') {
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const PhiDashboard(),
+        ),
+      );
     }
   }
 
@@ -67,9 +78,11 @@ class _StartupPageState extends State<StartupPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   //Header Container
-                  const NavBar(
+                  NavBar(
                     showLoginSignup: true,
                     showLogout: false,
+                    currentUser:
+                        User(name: '', userName: '', contactNo: '', email: ''),
                   ),
                   //Body Container
                   Expanded(
@@ -92,6 +105,7 @@ class _StartupPageState extends State<StartupPage> {
                           ),
                           const Text(
                             'Welcome To',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 44,
                               fontWeight: FontWeight.bold,
@@ -99,53 +113,114 @@ class _StartupPageState extends State<StartupPage> {
                               letterSpacing: 7,
                             ),
                           ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'R',
-                                style: TextStyle(
-                                  fontSize: 44,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: 7,
+                          MediaQuery.of(context).size.width > 490
+                              ? const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'R',
+                                      style: TextStyle(
+                                        fontSize: 44,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        letterSpacing: 7,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      'estaurant',
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        //fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        letterSpacing: 7,
+                                        textBaseline: TextBaseline.ideographic,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      ' R',
+                                      style: TextStyle(
+                                        fontSize: 44,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        letterSpacing: 7,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      'eviewer',
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        //fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        letterSpacing: 7,
+                                        textBaseline: TextBaseline.ideographic,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                )
+                              : const Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'R',
+                                          style: TextStyle(
+                                            fontSize: 44,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            letterSpacing: 7,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text(
+                                          'estaurant',
+                                          style: TextStyle(
+                                            fontSize: 30,
+                                            //fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            letterSpacing: 7,
+                                            textBaseline:
+                                                TextBaseline.ideographic,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          ' R',
+                                          style: TextStyle(
+                                            fontSize: 44,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            letterSpacing: 7,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text(
+                                          'eviewer',
+                                          style: TextStyle(
+                                            fontSize: 30,
+                                            //fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            letterSpacing: 7,
+                                            textBaseline:
+                                                TextBaseline.ideographic,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                'estaurant',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  //fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: 7,
-                                  textBaseline: TextBaseline.ideographic,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                ' R',
-                                style: TextStyle(
-                                  fontSize: 44,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: 7,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                'eviewer',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  //fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: 7,
-                                  textBaseline: TextBaseline.ideographic,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
                           const SizedBox(
                             height: 50,
                           ),
@@ -170,6 +245,9 @@ class _StartupPageState extends State<StartupPage> {
                               ),
                               textAlign: TextAlign.center,
                             ),
+                          ),
+                          const SizedBox(
+                            height: 50,
                           ),
                         ],
                       ),

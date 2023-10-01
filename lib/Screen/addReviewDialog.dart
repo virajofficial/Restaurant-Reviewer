@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
 import '../Components/alertDialog.dart';
-import 'RegisterPage.dart';
 import '../Components/inputField.dart';
 
 class AddReviewDialogue extends StatefulWidget {
@@ -45,7 +44,9 @@ class _MyWidgetState extends State<AddReviewDialogue> {
       } catch (error) {
         if (error is DioException) {
           print(error.response);
-          showMyDialog('Unable to login', error.response?.data['message']);
+          // ignore: use_build_context_synchronously
+          showMyDialog(
+              'Unable to login', error.response?.data['message'], () {});
         }
         return;
       }
@@ -55,88 +56,107 @@ class _MyWidgetState extends State<AddReviewDialogue> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(0),
+      contentPadding: EdgeInsets.symmetric(horizontal: 0),
       backgroundColor: Colors.transparent,
-      content: Container(
-        decoration: BoxDecoration(
-            gradient: RadialGradient(colors: const [
-              Color.fromARGB(255, 194, 147, 102),
-              Color.fromARGB(255, 216, 170, 139),
-            ]),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 5,
-                blurStyle: BlurStyle.outer,
-                offset: Offset(0.1, 0.1),
-                spreadRadius: 0,
-                color: Colors.black45,
-              )
-            ]),
-        width: 500,
-        height: 700,
-        constraints: const BoxConstraints(
-          minHeight: 700,
-        ),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const SizedBox(
-                  height: 20,
+      content: FittedBox(
+        child: Container(
+          width: 550,
+          padding: EdgeInsets.symmetric(horizontal: 0),
+          decoration: BoxDecoration(
+              gradient: RadialGradient(colors: const [
+                Color.fromARGB(255, 194, 147, 102),
+                Color.fromARGB(255, 216, 170, 139),
+              ]),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 5,
+                  blurStyle: BlurStyle.outer,
+                  offset: Offset(0.1, 0.1),
+                  spreadRadius: 0,
+                  color: Colors.black45,
+                )
+              ]),
+          constraints: const BoxConstraints(
+            minWidth: 400,
+            maxWidth: 550,
+            maxHeight: 650,
+          ),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Add Review',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  shadows: [
+                    BoxShadow(
+                      blurRadius: 3,
+                      blurStyle: BlurStyle.outer,
+                      color: Color.fromARGB(50, 0, 0, 0),
+                    )
+                  ],
+                  letterSpacing: 3,
                 ),
-                const Text(
-                  'Add Review',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    shadows: [
-                      BoxShadow(
-                        blurRadius: 3,
-                        blurStyle: BlurStyle.outer,
-                        color: Color.fromARGB(50, 0, 0, 0),
-                      )
-                    ],
-                    letterSpacing: 3,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SearchableDropdown(
+                            type: 'resNames',
+                            labelText: 'Select A Restaurant',
+                            onChange: (value) {
+                              setState(() {
+                                restaurant = value;
+                              });
+                            }),
+                        SearchableDropdown(
+                            type: 'searchableDD',
+                            labelText: 'Restaurant Location',
+                            onChange: (value) {
+                              setState(() {
+                                phiArea = value;
+                              });
+                            }),
+                        InputField(
+                          minMultilines: 10,
+                          maxMultilines: 10,
+                          type: 'multiline',
+                          labelText: 'Enter Your Message...',
+                          onChange: (value) {
+                            setState(() {
+                              review = value;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SearchableDropdown(
-                    type: 'resNames',
-                    labelText: 'Select A Restaurant',
-                    onChange: (value) {
-                      setState(() {
-                        restaurant = value;
-                      });
-                    }),
-                SearchableDropdown(
-                    type: 'searchableDD',
-                    labelText: 'Restaurant Location',
-                    onChange: (value) {
-                      setState(() {
-                        phiArea = value;
-                      });
-                    }),
-                InputField(
-                  minMultilines: 7,
-                  maxMultilines: 7,
-                  type: 'multiline',
-                  labelText: 'Enter Your Message...',
-                  onChange: (value) {
-                    setState(() {
-                      review = value;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Container(
                   decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Color(0xFFFF8947), Color(0xFFFF5C00)],
@@ -155,7 +175,7 @@ class _MyWidgetState extends State<AddReviewDialogue> {
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                       //elevation: 5,
-                      minimumSize: const Size(370, 50),
+                      minimumSize: const Size(500, 50),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -169,10 +189,13 @@ class _MyWidgetState extends State<AddReviewDialogue> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Container(
                   decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -194,7 +217,7 @@ class _MyWidgetState extends State<AddReviewDialogue> {
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                       //elevation: 5,
-                      minimumSize: const Size(370, 50),
+                      minimumSize: const Size(500, 50),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -210,11 +233,11 @@ class _MyWidgetState extends State<AddReviewDialogue> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                )
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 20,
+              )
+            ],
           ),
         ),
       ),

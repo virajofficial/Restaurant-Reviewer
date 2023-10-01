@@ -1,3 +1,4 @@
+// ignore: file_names
 class RestaurantNames {
   final int resId;
   final String resName;

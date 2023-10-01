@@ -15,30 +15,33 @@ import 'package:restaurant_reviewer/Components/footer.dart';
 import 'package:restaurant_reviewer/Components/inputField.dart';
 import 'package:restaurant_reviewer/Components/navbar.dart';
 
-class RestaurantReviewsPage extends StatefulWidget {
-  const RestaurantReviewsPage({super.key});
+class PHIRestaurantReviewsPage extends StatefulWidget {
+  const PHIRestaurantReviewsPage({super.key});
 
   @override
-  State<RestaurantReviewsPage> createState() => _RestaurantReviewsPageState();
+  State<PHIRestaurantReviewsPage> createState() =>
+      _RestaurantReviewsPageState();
 }
 
-class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
+class _RestaurantReviewsPageState extends State<PHIRestaurantReviewsPage> {
   List<Review> reviews = [];
   List<Restaurant> restaurants = [];
   User currentUser = User(name: '', userName: '', contactNo: '', email: '');
 
   getReviews() async {
     List<Review> response = await getReviewsCall();
+    print('review body');
+    print(response);
     setState(() {
       reviews = response;
     });
   }
 
   getUserProfile() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       currentUser =
-          User.fromJson(jsonDecode(pref.getString('user_profile') ?? '{}'));
+          User.fromJson(jsonDecode(prefs.getString('user_profile') ?? '{}'));
     });
   }
 
@@ -108,7 +111,7 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Restaurant Reviews',
+                            'PHI Dashboard',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 20,
@@ -139,6 +142,7 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                               ),
                             ),
                           ),
+                          Expanded(child: Container()),
                           Positioned(
                             right: 20,
                             bottom: 20,

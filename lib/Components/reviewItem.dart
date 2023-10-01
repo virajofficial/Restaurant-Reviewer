@@ -9,10 +9,10 @@ class ReviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: [
-          Container(
+    return Stack(
+      children: [
+        FittedBox(
+          child: Container(
             decoration: const BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -36,13 +36,13 @@ class ReviewItem extends StatelessWidget {
             alignment: Alignment.center,
             constraints: const BoxConstraints(minWidth: 500, maxWidth: 800),
             height: 120,
-            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: double.infinity,
-                  height: 60,
+                  height: 65,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: const BoxDecoration(
                       color: Color(0xFFFFBE99),
@@ -93,7 +93,7 @@ class ReviewItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     softWrap: true,
-                    textAlign: TextAlign.justify,
+                    textAlign: TextAlign.start,
                     style: const TextStyle(
                       fontSize: 18,
                       height: 1,
@@ -104,7 +104,9 @@ class ReviewItem extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+        ),
+        FittedBox(
+          child: Container(
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: Material(
               color: Colors.transparent,
@@ -128,9 +130,9 @@ class ReviewItem extends StatelessWidget {
                 ),
               ),
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }

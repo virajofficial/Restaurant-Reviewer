@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class Phi {
   final int phiId;
   final String phiName;
@@ -20,8 +18,6 @@ class Phi {
   });
 
   factory Phi.fromJson(Map<String, dynamic> parsedJson) {
-    print('Parsed JSON **************************');
-    print(parsedJson);
     return Phi(
       phiId: parsedJson['id'],
       phiName: parsedJson['phiName'],

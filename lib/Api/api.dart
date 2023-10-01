@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:restaurant_reviewer/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:restaurant_reviewer/models/pihArea.dart';
 import 'package:restaurant_reviewer/models/restaurant.dart';
@@ -17,6 +18,8 @@ callApi(method, url, data) async {
   Response response;
   SharedPreferences prefs = await SharedPreferences.getInstance();
   dynamic userDetails = jsonDecode(prefs.getString('user_details') ?? '{}');
+  print(userDetails);
+
   Options options =
       Options(headers: {'authorization': userDetails['token'] ?? ''});
   try {
@@ -49,10 +52,10 @@ Future<dynamic> registerCall(String name, String userName, String password,
     "email": email,
     "contactNumber": contactNo
   });
-  if (response != null) {
+  if (response != null && response is! DioException) {
     return response['data'];
   } else {
-    print('Unable to register');
+    throw response;
   }
 }
 
@@ -66,6 +69,19 @@ Future<dynamic> loginCall(String userName, String password) async {
   } else {
     throw response;
   }
+}
+
+Future<dynamic> getCurrentUserCall(int userId) async {
+  var response = await callApi('GET', '/user-details/$userId', null);
+  if (response != null && response is! DioException) {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('user_profile', jsonEncode(response['data']));
+    return response['data'];
+  } else {
+    throw response;
+  }
+
+  //return response['data'].map((x) => User.fromJson(x));
 }
 
 Future<List<String>> getPHIAreasCall() async {
@@ -89,7 +105,6 @@ Future<List<Restaurant>> getRestaurantsCall() async {
 Future<List<Phi>> getPhisCall() async {
   var response = await callApi('GET', '/phi-details', null);
   if (response != null && response is! DioException) {
-    print("PHI AREAS RES *********************");
     return List<Phi>.from(response['data'].map((x) => Phi.fromJson(x)));
   } else {
     throw response;
@@ -225,6 +240,13 @@ Future<dynamic> addReviewCall(
   String status,
   String phiArea,
 ) async {
+  // dynamic resPre = await reivewPrediction(reviewDetails);
+  // print(resPre['prediction']);
+  // if (resPre['prediction'] == "Negative") {
+  //   status = "bad";
+  // } else if (resPre['prediction'] == "Positive") {
+  //   status = "good";
+  // }
   var response = await callApi('POST', '/review', {
     "restaurantId": restaurantId,
     "reviewDetails": reviewDetails,
@@ -233,6 +255,51 @@ Future<dynamic> addReviewCall(
   });
   if (response != null && response is! DioException) {
     return response['data'];
+  } else {
+    throw response;
+  }
+}
+
+// Future<dynamic> reivewPrediction(
+//   String message,
+// ) async {
+//   final BaseOptions optionsN = BaseOptions(baseUrl: 'http://localhost:5500');
+
+//   final dioNew = Dio();
+//   print('prediction called');
+//   try {
+//     dynamic predRes = await dioNew
+//         .post('http://127.0.0.1:5500/send/', data: {"message": message});
+//     print("predicted Res:");
+//     if (predRes != null) {
+//       return predRes;
+//     } else {
+//       throw predRes;
+//     }
+//   } catch (e) {
+//     print(e);
+//   }
+// }
+
+Future<dynamic> forgotPWCall(String userName) async {
+  var response =
+      await callApi('POST', '/forget-password', {"userName": userName});
+  if (response != null && response is! DioException) {
+    return response;
+  } else {
+    throw response;
+  }
+}
+
+Future<dynamic> resetPWCall(
+    String userName, String otp, String newPassword) async {
+  var response = await callApi('POST', '/password-reset', {
+    "userName": userName,
+    "oldPassword": otp,
+    "currentPassword": newPassword
+  });
+  if (response != null && response is! DioException) {
+    return response;
   } else {
     throw response;
   }
