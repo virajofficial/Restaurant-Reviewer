@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_reviewer/Components/sideBarItem.dart';
 
-class SideBar extends StatelessWidget {
-  const SideBar(
+class AdminSideBar extends StatelessWidget {
+  const AdminSideBar(
       {super.key,
       required this.selectedTab,
       required this.changeTab,

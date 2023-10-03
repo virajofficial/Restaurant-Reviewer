@@ -1,11 +1,48 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/alertDialog.dart';
 import 'package:restaurant_reviewer/Screen/reviewDialog.dart';
 import 'package:restaurant_reviewer/models/review.dart';
 
-class ReviewItem extends StatelessWidget {
-  const ReviewItem({super.key, required this.review});
+class ReviewItem extends StatefulWidget {
+  ReviewItem({
+    super.key,
+    required this.type,
+    required this.review,
+    this.isPhi = false,
+    this.isCheckUse = false,
+    this.isPhiMark = false,
+    required this.updateReviewList,
+  });
 
+  final String type;
   final Review review;
+  final bool isCheckUse;
+  final bool isPhi;
+  bool? isPhiMark;
+  final Function updateReviewList;
+
+  @override
+  State<ReviewItem> createState() => _ReviewItemState();
+}
+
+class _ReviewItemState extends State<ReviewItem> {
+  handlePhiMark(bool? phiMarked) async {
+    try {
+      var phiMarkedResponse = await markReviewCall(
+        widget.review.id,
+        phiMarked,
+      );
+    } catch (error) {
+      if (error is DioException) {
+        showAlertDialog(
+            'Unable to Mark Review', error.response?.data['message'], () {},
+            themeColor: Color(0xFFFF1B1B));
+      }
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +100,7 @@ class ReviewItem extends StatelessWidget {
                       Container(
                         width: 500,
                         child: Text(
-                          review.review,
+                          widget.review.review,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
@@ -75,7 +112,7 @@ class ReviewItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        review.phiArea,
+                        '${widget.review.restaurantName} - ${widget.review.phiArea}',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         softWrap: true,
@@ -89,7 +126,7 @@ class ReviewItem extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   child: Text(
-                    review.review,
+                    widget.review.review,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     softWrap: true,
@@ -119,8 +156,11 @@ class ReviewItem extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (BuildContext context) =>
-                        ReviewDialog(review: review),
+                    builder: (BuildContext context) => ReviewDialog(
+                        type: widget.type,
+                        review: widget.review,
+                        isPhi: widget.isPhi,
+                        updateReviewList: widget.updateReviewList),
                   );
                 },
                 child: Container(
@@ -131,7 +171,36 @@ class ReviewItem extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
+        widget.isCheckUse
+            ? Row(
+                children: [
+                  Expanded(child: Container()),
+                  FittedBox(
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: Checkbox(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            side: BorderSide(color: Colors.red)),
+                        checkColor: Colors.white,
+                        activeColor: Color.fromARGB(255, 236, 148, 76),
+                        //fillColor: Colors.green,
+                        value: widget.isPhiMark,
+                        onChanged: ((value) async {
+                          setState(() {
+                            widget.isPhiMark = value;
+                          });
+                          await handlePhiMark(value);
+                          widget.updateReviewList();
+                        }),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : Container(),
       ],
     );
   }

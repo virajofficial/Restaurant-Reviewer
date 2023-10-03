@@ -30,8 +30,8 @@ class _RestaurantReviewsPageState extends State<PHIRestaurantReviewsPage> {
 
   getReviews() async {
     List<Review> response = await getReviewsCall();
-    print('review body');
-    print(response);
+    //print('review body');
+    //print(response);
     setState(() {
       reviews = response;
     });
@@ -136,8 +136,10 @@ class _RestaurantReviewsPageState extends State<PHIRestaurantReviewsPage> {
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: reviews.length,
-                                  itemBuilder: (context, index) =>
-                                      ReviewItem(review: reviews[index]),
+                                  itemBuilder: (context, index) => ReviewItem(
+                                      type: 'type',
+                                      review: reviews[index],
+                                      updateReviewList: getReviews),
                                 ),
                               ),
                             ),

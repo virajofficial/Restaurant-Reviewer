@@ -133,8 +133,10 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: reviews.length,
-                                  itemBuilder: (context, index) =>
-                                      ReviewItem(review: reviews[index]),
+                                  itemBuilder: (context, index) => ReviewItem(
+                                      type: 'user',
+                                      review: reviews[index],
+                                      updateReviewList: getReviews),
                                 ),
                               ),
                             ),

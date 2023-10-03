@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:restaurant_reviewer/Components/alertDialog.dart';
 import 'package:restaurant_reviewer/Screen/phiDashboard.dart';
 import 'package:restaurant_reviewer/Screen/phiRestaurantReviewesPage.dart';
 import 'package:restaurant_reviewer/models/user.dart';
@@ -23,6 +24,7 @@ class _StartupPageState extends State<StartupPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic userDetails = jsonDecode(prefs.getString('user_details') ?? '{}');
     String userRole = userDetails['role'] ?? '';
+
     if (userRole == 'user') {
       // ignore: use_build_context_synchronously
       Navigator.push(
@@ -44,10 +46,11 @@ class _StartupPageState extends State<StartupPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const PhiDashboard(),
+          builder: (context) => PhiDashboard(phiArea: userDetails['phiArea']),
         ),
       );
     }
+    // showAlertDialog('title', 'subtitle df ', themeColor: Colors.red, () {});
   }
 
   @override

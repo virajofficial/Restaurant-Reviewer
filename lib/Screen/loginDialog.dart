@@ -35,8 +35,7 @@ class _LoginDialogState extends State<LoginDialog> {
       try {
         var loginResponse = await loginCall(username, password);
         await currentUserGet(loginResponse);
-        print("login called");
-        print(loginResponse['role']);
+        //print(loginResponse['role']);
         if (loginResponse['role'] == 'user') {
           // ignore: use_build_context_synchronously
           Navigator.push(
@@ -58,15 +57,17 @@ class _LoginDialogState extends State<LoginDialog> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const PhiDashboard(),
+              builder: (context) => PhiDashboard(
+                phiArea: loginResponse['phiArea'],
+              ),
             ),
           );
         }
       } catch (error) {
         if (error is DioException) {
-          showMyDialog(
+          showAlertDialog(
               'Unable to login', error.response?.data['message'], () {},
-              themeColor: Color(0xFFFF1B1B));
+              themeColor: Colors.red);
         }
         return;
       }
@@ -81,8 +82,12 @@ class _LoginDialogState extends State<LoginDialog> {
       // });
     } catch (error) {
       if (error is DioException) {
-        showMyDialog(
-            'Unable to Get User', error.response?.data['message'], () {});
+        showAlertDialog(
+          'Unable to Get User',
+          error.response?.data['message'],
+          () {},
+          themeColor: Color(0xFFFF1B1B),
+        );
       }
       return;
     }

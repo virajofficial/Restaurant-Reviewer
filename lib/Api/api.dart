@@ -18,7 +18,6 @@ callApi(method, url, data) async {
   Response response;
   SharedPreferences prefs = await SharedPreferences.getInstance();
   dynamic userDetails = jsonDecode(prefs.getString('user_details') ?? '{}');
-  print(userDetails);
 
   Options options =
       Options(headers: {'authorization': userDetails['token'] ?? ''});
@@ -63,6 +62,8 @@ Future<dynamic> loginCall(String userName, String password) async {
   var response = await callApi(
       'POST', '/login', {"userName": userName, "password": password});
   if (response != null && response is! DioException) {
+    //print('Login res');
+    //print(response);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('user_details', jsonEncode(response['data']));
     return response['data'];
@@ -96,8 +97,8 @@ Future<List<String>> getPHIAreasCall() async {
 
 Future<List<Restaurant>> getRestaurantsCall() async {
   var response = await callApi('GET', '/restaurant-details', null);
-  print('Restaurant Response');
-  print(response);
+  //print('Restaurant Response');
+  //print(response);
   return List<Restaurant>.from(
       response['data'].map((x) => Restaurant.fromJson(x)));
 }
@@ -109,13 +110,6 @@ Future<List<Phi>> getPhisCall() async {
   } else {
     throw response;
   }
-}
-
-Future<List<Review>> getReviewsCall() async {
-  var response = await callApi('GET', '/review', null);
-  print('Reviews Response');
-  print(response);
-  return List<Review>.from(response['data'].map((x) => Review.fromJson(x)));
 }
 
 Future<dynamic> addRestaurantCall(
@@ -147,8 +141,8 @@ Future<dynamic> editRestaurantCall(
   String resAddress,
   String resPhiArea,
 ) async {
-  print('resturant id');
-  print(resId);
+  //print('resturant id');
+  //print(resId);
   var response = await callApi('PUT', '/restaurant-details/$resId', {
     "restaurantName": resName,
     "contactNumber": resContactNo,
@@ -157,8 +151,8 @@ Future<dynamic> editRestaurantCall(
   });
 
   if (response != null && response is! DioException) {
-    print('editing restaurant data');
-    print(response);
+    //print('editing restaurant data');
+    //print(response);
     return response['data'];
   } else {
     throw response;
@@ -234,52 +228,65 @@ Future<dynamic> removePHICall(
   }
 }
 
+Future<List<Review>> getReviewsCall(
+    {String phiArea = '', String restaurantId = ''}) async {
+  var response = await callApi('GET', '/review?$phiArea', null);
+  //print('Reviews Response');
+  //print(response);
+  return List<Review>.from(response['data'].map((x) => Review.fromJson(x)));
+}
+
 Future<dynamic> addReviewCall(
   String restaurantId,
   String reviewDetails,
   String status,
   String phiArea,
 ) async {
-  // dynamic resPre = await reivewPrediction(reviewDetails);
-  // print(resPre['prediction']);
-  // if (resPre['prediction'] == "Negative") {
-  //   status = "bad";
-  // } else if (resPre['prediction'] == "Positive") {
-  //   status = "good";
-  // }
   var response = await callApi('POST', '/review', {
     "restaurantId": restaurantId,
     "reviewDetails": reviewDetails,
-    "status": status,
     "phiArea": phiArea,
   });
   if (response != null && response is! DioException) {
+    //print('review res');
+    //print(response);
     return response['data'];
   } else {
     throw response;
   }
 }
 
-// Future<dynamic> reivewPrediction(
-//   String message,
-// ) async {
-//   final BaseOptions optionsN = BaseOptions(baseUrl: 'http://localhost:5500');
+Future<dynamic> markReviewCall(
+  int id,
+  bool? isPhiMarked,
+) async {
+  var response = await callApi('PUT', '/review/$id', {
+    "isPhiMark": isPhiMarked,
+  });
+  if (response != null && response is! DioException) {
+    //print(response);
+    return response['data'];
+  } else {
+    throw response;
+  }
+}
 
-//   final dioNew = Dio();
-//   print('prediction called');
-//   try {
-//     dynamic predRes = await dioNew
-//         .post('http://127.0.0.1:5500/send/', data: {"message": message});
-//     print("predicted Res:");
-//     if (predRes != null) {
-//       return predRes;
-//     } else {
-//       throw predRes;
-//     }
-//   } catch (e) {
-//     print(e);
-//   }
-// }
+Future<dynamic> reveiwStatusCall(
+  int id,
+  String status,
+  bool isPhiMark,
+) async {
+  var response = await callApi('PUT', '/review/$id', {
+    "status": status,
+    "isPhiMark": isPhiMark,
+  });
+  if (response != null && response is! DioException) {
+    //print(response);
+    return response['data'];
+  } else {
+    throw response;
+  }
+}
 
 Future<dynamic> forgotPWCall(String userName) async {
   var response =

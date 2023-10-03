@@ -44,8 +44,12 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
           setState(() {
             isloading = false;
           });
-          showMyDialog(
-              'Unable to Send OTP', error.response?.data['message'], () {});
+          showAlertDialog(
+            'Unable to Send OTP',
+            error.response?.data['message'],
+            () {},
+            themeColor: Colors.red,
+          );
         }
         return;
       }

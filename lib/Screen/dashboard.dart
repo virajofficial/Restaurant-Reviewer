@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:restaurant_reviewer/Components/adminSideBar.dart';
 import 'package:restaurant_reviewer/Components/footer.dart';
 import 'package:restaurant_reviewer/Components/navbar.dart';
-import 'package:restaurant_reviewer/Components/sideBar.dart';
 import 'package:restaurant_reviewer/Screen/phiManage.dart';
 import 'package:restaurant_reviewer/Screen/restaurantManage.dart';
 import 'package:restaurant_reviewer/models/user.dart';
@@ -71,14 +71,14 @@ class _DashboardState extends State<Dashboard> {
                     child: Row(
                   children: [
                     MediaQuery.of(context).size.width > 800
-                        ? SideBar(
+                        ? AdminSideBar(
                             selectedTab: selectedTab, changeTab: changeTab)
                         : Container(),
                     Expanded(
                         child: Column(
                       children: [
                         MediaQuery.of(context).size.width <= 800
-                            ? SideBar(
+                            ? AdminSideBar(
                                 selectedTab: selectedTab,
                                 changeTab: changeTab,
                                 isHorizontal: true,

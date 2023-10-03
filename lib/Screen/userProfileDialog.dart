@@ -30,8 +30,8 @@ class _UserProfileDialogState extends State<UserProfileDialog> {
       currentUser =
           User.fromJson(jsonDecode(prefs.getString('user_profile') ?? '{}'));
     });
-    print('current user');
-    print(currentUser.email);
+    //print('current user');
+    //print(currentUser.email);
   }
 
   @override
@@ -58,6 +58,7 @@ class _UserProfileDialogState extends State<UserProfileDialog> {
       //   }
       //   return;
       // }
+      return;
     }
   }
 

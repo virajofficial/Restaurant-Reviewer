@@ -41,16 +41,25 @@ class _ForgotPasswordDialogState extends State<ResetPWDialog> {
         if (forgotPWResponse['success'] = true) {
           // ignore: use_build_context_synchronously
           Navigator.of(context).pop();
-          showMyDialog('Reset Password Successfully!',
-              'You have reset your password successfully.', () {});
+          showAlertDialog(
+            'Reset Successfully!',
+            'You have reset your password successfully.',
+            () {},
+            themeColor: Color.fromARGB(255, 14, 199, 20),
+            type: 'green',
+          );
         }
       } catch (error) {
         if (error is DioException) {
           setState(() {
             isLoading = false;
           });
-          showMyDialog('Unable to Rest Password',
-              error.response?.data['message'], () {});
+          showAlertDialog(
+            'Unable to Rest Password',
+            error.response?.data['message'],
+            () {},
+            themeColor: Colors.red,
+          );
         }
         return;
       }

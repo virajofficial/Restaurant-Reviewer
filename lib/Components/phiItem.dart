@@ -11,8 +11,6 @@ class PhiItem extends StatelessWidget {
   final Phi phi;
   final Function reloadPhi;
 
-  void dummyGetPhis() {}
-
   @override
   Widget build(BuildContext context) {
     return Center(

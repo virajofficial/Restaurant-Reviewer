@@ -42,14 +42,15 @@ class _SearchableDropdownState extends State<SearchableDropdown> {
     setState(() {
       restaurants = response;
       for (int i = 0; i < restaurants.length; i++) {
-        restaurantNames.add(restaurants[i].resName);
+        restaurantNames
+            .add('${restaurants[i].resName} - ${restaurants[i].resPhiArea}');
       }
     });
   }
 
   String getRestaurantId(String value) {
     int index = restaurantNames.indexOf(value);
-    return restaurants[index].resId.toString();
+    return '${restaurants[index].resId.toString()}-${value.split(' - ')[1]}';
   }
 
   @override
