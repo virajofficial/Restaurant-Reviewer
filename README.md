@@ -1,6 +1,6 @@
-# sized_box_test
+# Restaurant Reviewer - Frontend
 
-"A new Flutter project."
+"A Flutter web application to manage restaurant reviews."
 
 ## Getting Started
 
