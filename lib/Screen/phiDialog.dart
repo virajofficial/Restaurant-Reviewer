@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -68,6 +66,8 @@ class _MyWidgetState extends State<PhiDialogue> {
           isLoading = false;
         });
         if (addPhiResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
           showAlertDialog(
             'Successfully Added.!',
             'New PHI Added successfully.',
@@ -75,8 +75,7 @@ class _MyWidgetState extends State<PhiDialogue> {
             () {},
             themeColor: const Color.fromARGB(255, 32, 187, 37),
           );
-          // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+
           widget.reloadPhis();
         }
       } catch (error) {
@@ -106,6 +105,8 @@ class _MyWidgetState extends State<PhiDialogue> {
           isLoading = false;
         });
         if (editPhiResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
           showAlertDialog(
             'Successfully Updated.!',
             'PHI data updated successfully.',
@@ -113,8 +114,7 @@ class _MyWidgetState extends State<PhiDialogue> {
             () {},
             themeColor: const Color.fromARGB(255, 32, 187, 37),
           );
-          // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+
           widget.reloadPhis();
         }
       } catch (error) {
@@ -145,6 +145,8 @@ class _MyWidgetState extends State<PhiDialogue> {
           isLoading = false;
         });
         if (removePhiResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
           showAlertDialog(
             'Successfully Deleted.!',
             'PHI data deleted successfully.',
@@ -152,8 +154,7 @@ class _MyWidgetState extends State<PhiDialogue> {
             type: 'green',
             themeColor: const Color.fromARGB(255, 32, 187, 37),
           );
-          // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+
           widget.reloadPhis();
         }
       } catch (error) {
@@ -183,13 +184,13 @@ class _MyWidgetState extends State<PhiDialogue> {
           content: (widget.state == 'add')
               ? Container(
                   // **********************************************************************Add Phi Dialouge
-                  decoration: BoxDecoration(
-                      gradient: RadialGradient(colors: const [
+                  decoration: const BoxDecoration(
+                      gradient: RadialGradient(colors: [
                         Color.fromARGB(255, 194, 147, 102),
                         Color.fromARGB(255, 216, 170, 139),
                       ]),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
                           blurRadius: 5,
                           blurStyle: BlurStyle.outer,
@@ -396,13 +397,13 @@ class _MyWidgetState extends State<PhiDialogue> {
                 )
               : Container(
                   // **********************************************************************Edit Phi Dialouge
-                  decoration: BoxDecoration(
-                      gradient: RadialGradient(colors: const [
+                  decoration: const BoxDecoration(
+                      gradient: RadialGradient(colors: [
                         Color.fromARGB(255, 194, 147, 102),
                         Color.fromARGB(255, 216, 170, 139),
                       ]),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
                           blurRadius: 5,
                           blurStyle: BlurStyle.outer,

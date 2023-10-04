@@ -66,6 +66,8 @@ class _MyWidgetState extends State<RestaurantDialogue> {
           isLoading = false;
         });
         if (addResResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
           showAlertDialog(
             'Successfully Added.!!',
             'New Restaurant added successfully.',
@@ -73,8 +75,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
             themeColor: Color.fromARGB(255, 14, 199, 20),
             type: 'green',
           );
-          // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+
           widget.onReloadRestaurants();
         }
       } catch (error) {
@@ -106,6 +107,8 @@ class _MyWidgetState extends State<RestaurantDialogue> {
           isLoading = false;
         });
         if (editResResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
           showAlertDialog(
             'Successfully Updated.!!',
             'Restaurant updated successfully.',
@@ -113,8 +116,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
             themeColor: Color.fromARGB(255, 14, 199, 20),
             type: 'green',
           );
-          // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+
           widget.onReloadRestaurants();
         }
       } catch (error) {
@@ -146,6 +148,8 @@ class _MyWidgetState extends State<RestaurantDialogue> {
           isLoading = false;
         });
         if (removeResResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
           showAlertDialog(
             'Successfully Removed.!!',
             'Restaurant removed successfully.',
@@ -153,8 +157,7 @@ class _MyWidgetState extends State<RestaurantDialogue> {
             themeColor: Color.fromARGB(255, 14, 199, 20),
             type: 'green',
           );
-          // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+
           widget.onReloadRestaurants();
         }
       } catch (error) {

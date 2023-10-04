@@ -42,6 +42,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
       setState(() {
         isLoading = false;
       });
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
       showAlertDialog(
         status == 'good'

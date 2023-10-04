@@ -37,7 +37,7 @@ class _RegisterDialogState extends State<RegisterDialog> {
     if (_formKey.currentState!.validate()) {
       try {
         setState(() {
-          isLoading = false;
+          isLoading = true;
         });
         var signupResponse =
             await registerCall(name, username, password, email, contactNo);
