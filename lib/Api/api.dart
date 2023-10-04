@@ -10,10 +10,10 @@ import 'package:restaurant_reviewer/models/review.dart';
 
 import '../models/phi.dart';
 
-final BaseOptions options = BaseOptions(baseUrl: 'http://127.0.0.1:8080');
+// final BaseOptions options = BaseOptions(baseUrl: 'http://127.0.0.1:8080');
 
-// final BaseOptions options =
-//     BaseOptions(baseUrl: 'https://restaurant-reviewer-backend.up.railway.app/');
+final BaseOptions options =
+    BaseOptions(baseUrl: 'https://restaurant-reviewer-backend.up.railway.app/');
 
 final dio = Dio(options);
 
