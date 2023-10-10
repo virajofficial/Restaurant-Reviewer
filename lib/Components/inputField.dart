@@ -13,18 +13,19 @@ class InputField extends StatefulWidget {
   final int minMultilines;
   final int maxMultilines;
 
-  const InputField(
-      {super.key,
-      required this.type,
-      this.mode = 'add',
-      this.initialValue = '',
-      this.readOnly = false,
-      required this.labelText,
-      required this.onChange,
-      this.minMultilines = 1,
-      this.maxMultilines = 5,
-      this.controller,
-      this.validator});
+  const InputField({
+    super.key,
+    required this.type,
+    this.mode = 'add',
+    this.initialValue = '',
+    this.readOnly = false,
+    required this.labelText,
+    required this.onChange,
+    this.minMultilines = 1,
+    this.maxMultilines = 5,
+    this.controller,
+    this.validator,
+  });
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -78,6 +79,7 @@ class _InputFieldState extends State<InputField> {
                       return widget.validator!(value);
                     }
                     if (value == null || value.isEmpty) {
+                      // check input value is empty
                       return 'Please enter ${widget.labelText}';
                     }
                     if (widget.type == "email") {
