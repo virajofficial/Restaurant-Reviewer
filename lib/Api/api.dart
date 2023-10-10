@@ -209,7 +209,8 @@ Future<dynamic> editPHICall(
     "phiName": phiName,
     "contactNumber": contactNo,
     "address": address,
-    "phiArea": phiArea
+    "phiArea": phiArea,
+    "active": true
   });
   if (response != null && response is! DioException) {
     return response['data'];
