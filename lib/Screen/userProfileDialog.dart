@@ -1,15 +1,22 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_reviewer/Api/api.dart';
+import 'package:restaurant_reviewer/Components/alertDialog.dart';
 import 'package:restaurant_reviewer/Components/inputField.dart';
 import 'package:restaurant_reviewer/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileDialog extends StatefulWidget {
-  const UserProfileDialog({super.key, required this.userdata});
+  const UserProfileDialog({
+    super.key,
+    required this.userdata,
+    required this.reloadUserData,
+  });
 
   final User userdata;
+  final Function reloadUserData;
 
   @override
   State<UserProfileDialog> createState() => _UserProfileDialogState();
@@ -37,27 +44,36 @@ class _UserProfileDialogState extends State<UserProfileDialog> {
   @override
   void initState() {
     //getUserProfile();
+    fname = widget.userdata.name;
+    email = widget.userdata.email;
+    contactNo = widget.userdata.contactNo;
     super.initState();
   }
 
   handleEditUserData() async {
     if (_formKey.currentState!.validate()) {
-      // try {
-      //   var editPhiResponse = await editPHICall(
-      //       widget.details.phiId, phiName, phiContactNo, phiAddress, phiArea);
-      //   if (editPhiResponse['success'] = true) {
-      //     // ignore: use_build_context_synchronously
-      //     Navigator.pop(context);
-      //     widget.reloadPhis();
-      //   }
-      // } catch (error) {
-      //   if (error is DioException) {
-      //     print(error.response);
-      //     showMyDialog(
-      //         'Unable to Edit PHI', error.response?.data['message'], () {});
-      //   }
-      //   return;
-      // }
+      try {
+        var editPhiResponse =
+            await editUserCall(widget.userdata.userId, fname, email, contactNo);
+        if (editPhiResponse['success'] = true) {
+          // ignore: use_build_context_synchronously
+          await widget.reloadUserData();
+          showAlertDialog(
+            'Successfully Updated.!',
+            'User data updated successfully.',
+            type: 'green',
+            () {},
+            themeColor: const Color.fromARGB(255, 32, 187, 37),
+          );
+        }
+      } catch (error) {
+        if (error is DioException) {
+          print(error.response);
+          showAlertDialog(
+              'Unable to Edit User', error.response?.data['message'], () {});
+        }
+        return;
+      }
       return;
     }
   }

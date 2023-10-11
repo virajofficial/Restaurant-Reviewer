@@ -86,6 +86,7 @@ class _StartupPageState extends State<StartupPage> {
                     showLogout: false,
                     currentUser:
                         User(name: '', userName: '', contactNo: '', email: ''),
+                    reloadUserData: () {},
                   ),
                   //Body Container
                   Expanded(

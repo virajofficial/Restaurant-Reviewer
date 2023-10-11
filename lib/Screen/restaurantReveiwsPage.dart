@@ -89,7 +89,9 @@ class _RestaurantReviewsPageState extends State<RestaurantReviewsPage> {
                                 name: currentUser.name,
                                 userName: currentUser.userName,
                                 contactNo: currentUser.contactNo,
-                                email: currentUser.email))
+                                email: currentUser.email),
+                            reloadUserData: getUserProfile,
+                          )
                         : Container(),
                     //Body Container
                     const SizedBox(

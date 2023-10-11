@@ -20,6 +20,7 @@ class NavBar extends StatefulWidget {
     this.userName = '',
     this.showUsername = false,
     required this.currentUser,
+    required this.reloadUserData,
   });
 
   final bool showLoginSignup;
@@ -28,6 +29,7 @@ class NavBar extends StatefulWidget {
   final String title;
   final String userName;
   final User currentUser;
+  final Function reloadUserData;
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -130,6 +132,7 @@ class _NavBarState extends State<NavBar> {
                             builder: (BuildContext context) =>
                                 UserProfileDialog(
                                   userdata: widget.currentUser,
+                                  reloadUserData: widget.reloadUserData,
                                 ));
                       },
                     )

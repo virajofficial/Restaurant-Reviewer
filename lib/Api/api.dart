@@ -88,6 +88,29 @@ Future<dynamic> getCurrentUserCall(int userId) async {
   //return response['data'].map((x) => User.fromJson(x));
 }
 
+Future<dynamic> editUserCall(
+  int userId,
+  String name,
+  String email,
+  String contactNo,
+) async {
+  //print('resturant id');
+  //print(resId);
+  var response = await callApi('PUT', '/user-details/$userId', {
+    "name": name,
+    "email": email,
+    "contactNumber": contactNo,
+  });
+
+  if (response != null && response is! DioException) {
+    //print('editing restaurant data');
+    //print(response);
+    return response['data'];
+  } else {
+    throw response;
+  }
+}
+
 Future<List<String>> getPHIAreasCall() async {
   var response = await callApi('GET', '/meta-data', null);
   if (response != null) {

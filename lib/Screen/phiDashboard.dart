@@ -104,7 +104,9 @@ class _DashboardState extends State<PhiDashboard> {
                             name: currentUser.name,
                             userName: currentUser.userName,
                             contactNo: currentUser.contactNo,
-                            email: currentUser.email))
+                            email: currentUser.email),
+                        reloadUserData: getUserProfile,
+                      )
                     : Container(),
                 //Body Container
                 Expanded(

@@ -63,9 +63,11 @@ class _DashboardState extends State<Dashboard> {
               children: <Widget>[
                 //Header Container
                 NavBar(
-                    title: 'ADMIN DASHBOARD',
-                    currentUser:
-                        User(name: '', userName: '', contactNo: '', email: '')),
+                  title: 'ADMIN DASHBOARD',
+                  currentUser:
+                      User(name: '', userName: '', contactNo: '', email: ''),
+                  reloadUserData: () {},
+                ),
                 //Body Container
                 Expanded(
                     child: Row(
